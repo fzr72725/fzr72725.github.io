@@ -8,8 +8,6 @@ premalink: /articles/gensim-guide/
 <img src="/images/jupyter_on_aws.jpg">
 </p>
 
-# Simple Guide on How to Connect to Jupyter Notebook Server on AWS EC2 from Your Local Machine
-
 **TL;DR:** _In this article I described the steps to set up and connect to Jupyter Notebook running on AWS EC2 instance from a local machine. I hope that by sharing these steps, I can help others save some hours so that they can focus on their actual projects!_
 
 Lately I realized that my capstone project needs a much more powerful machine for the computation after all.. Therefore I turned to Amazon's AWS EC2 instance. Since I'm doing a lot of EDA on my data, Jupyter Notebook has been my primary coding tool (although it is true that Jupyter Notebook can be quite annoying when you try to reproduce some data analysis that was run a while ago) for this particular project.
