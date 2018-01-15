@@ -1,3 +1,10 @@
+---
+layout: page
+theme: jekyll-theme-cayman
+title: Notes on My Journey of Learning
+description: The only thing to do with good advice is to pass it on. It is never of any use to oneself.
+---
+
 # A Start
 
 With a strong conviction for continuous learning, I love writing about things I just learned.
@@ -7,9 +14,9 @@ It is a great way to validate how well I grasp the knowledge. Moreover, I believ
 
 **Jan 2018**
 
-[Simple Guide on How to Connect to Jupyter Notebook Server on AWS EC2 from Your Local Machine](https://fzr72725.github.io/blob/master/_posts/2018-01-14-How-to-Connect-to-Jupyter-Notebook-Server-on-AWS-EC2-from-Your-Local-Machine.markdown)
+[Simple Guide on How to Connect to Jupyter Notebook Server on AWS EC2 from Your Local Machine](https://github.com/fzr72725/fzr72725.github.io/blob/master/_posts/2018-01-14-How-to-Connect-to-Jupyter-Notebook-Server-on-AWS-EC2-from-Your-Local-Machine.markdown)
 
-[My Pipeline of Text Classification Using Gensim's Doc2Vec and Logistic Regression](https://fzr72725.github.io/blob/master/_posts/2018-01-14-genism-guide.markdown)
+[My Pipeline of Text Classification Using Gensim's Doc2Vec and Logistic Regression](https://github.com/fzr72725/fzr72725.github.io/blob/master/_posts/2018-01-14-genism-guide.markdown)
 
 
 # Technical Notes On Machine Learning and Math and Python and So On
