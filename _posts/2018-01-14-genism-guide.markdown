@@ -25,6 +25,7 @@ Before diving into details, a high level summary of my text classification steps
 
 **Step 1
 Extract document vectors**
+
 1) Add tag to each document:
 ```
 def tag_docs(docs, col):
@@ -62,6 +63,7 @@ I personally found it more reasonable to use `infer_vector()` to "retrain" the d
 
 **Step 2
 Train the Logistic Regression Classifier**
+
 Besides figuring out my most proper way of extracting the document vectors, I also spent a lot of time on the general pipeline of how exactly to do the training and validation. My confusion was from the observation that some people used train+test document to build the doc2vec model vocabulary and then extracted document vectors using that model. I really struggled to accept this approach. Reason being: recall the typical tf-idf classfication workflow:
 ```
 X = df_new['text_content']
