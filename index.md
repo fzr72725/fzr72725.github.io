@@ -1,37 +1,15 @@
-## Welcome to GitHub Pages
+# A Start
 
-You can use the [editor on GitHub](https://github.com/fzr72725/fzr72725.github.io/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+With a strong conviction for continuous learning, I love writing about things I just learned.
+It is a great way to validate how well I grasp the knowledge. Moreover, I believe that by sharing what I learned with others, the audience and I will inspire each other. Therefore, I decided to start this site to put all my learning notes at one single source for mine and others' reference.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Articles
 
-### Markdown
+**Jan 2018**
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+[Simple Guide on How to Connect to Jupyter Notebook Server on AWS EC2 from Your Local Machine](https://fzr72725.github.io/blob/master/_posts/2018-01-14-How-to-Connect-to-Jupyter-Notebook-Server-on-AWS-EC2-from-Your-Local-Machine.markdown)
 
-```markdown
-Syntax highlighted code block
+[My Pipeline of Text Classification Using Gensim's Doc2Vec and Logistic Regression](https://fzr72725.github.io/blob/master/_posts/2018-01-14-genism-guide.markdown)
 
-# Header 1
-## Header 2
-### Header 3
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/fzr72725/fzr72725.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+# Technical Notes On Machine Learning and Math and Python and So On
