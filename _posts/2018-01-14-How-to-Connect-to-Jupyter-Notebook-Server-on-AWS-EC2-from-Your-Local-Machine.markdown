@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Simple Guide on How to Connect to Jupyter Notebook Server on AWS EC2 from Your Local Machine
-premalink: /articles/gensim-guide/
+premalink: /articles/gensim-pipeline/
 ---
 
 <p align="center">
