@@ -98,13 +98,12 @@ I'm still experimenting many different options for how to train the doc2vec mode
 
 Enjoy vectorizing!
 
-- Ziru
-
+-----
 ### Some good resources for learning doc2vec in general:
 [A gentle introduction to Doc2Vec](https://towardsdatascience.com/a-gentle-introduction-to-doc2vec-db3e8c0cce5e)
 
 [Distributed Representations of Sentences and Documents](http://proceedings.mlr.press/v32/le14.pdf)
-
+-----
 ### References:
 [RaRe Technology's _movie plots by genre_ example on github](https://github.com/RaRe-Technologies/movie-plots-by-genre/blob/master/Document%20classification%20with%20word%20embeddings%20tutorial.ipynb)
 
