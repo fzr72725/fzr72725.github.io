@@ -1,10 +1,11 @@
 ---
 layout: post
-title: Jupyter on AWS EC2
+title: Simple Guide on How to Connect to Jupyter Notebook Server on AWS EC2 from Your Local Machine
+premalink: /articles/gensim-guide/
 ---
 
 <p align="center">
-<img src="../images/jupyter_on_aws.jpg">
+<img src="/images/jupyter_on_aws.jpg">
 </p>
 
 # Simple Guide on How to Connect to Jupyter Notebook Server on AWS EC2 from Your Local Machine
@@ -49,10 +50,10 @@ http://localhost:8000/tree/
 Here 8000 is the local port I chose in _step 3_.
 
 You may see a page pops out with text box asking for a password or token, like below:
-![Image1](../images/ask_token.png)
+![Image1](/images/ask_token.png)
 
 In this case, just go to the terminal tab with the the remote Jupyter Notebook server you launched in _step 2_, and copy the token and paste it in the text box.
 
 ### 5. Now you have Jupyter Notebook client running on your local machine that is powered by an AWS EC2 instance!
-![Image2](../images/connected_jupy.png)
+![Image2](/images/connected_jupy.png)
 _You should see something like this_

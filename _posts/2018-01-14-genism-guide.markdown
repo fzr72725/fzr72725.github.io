@@ -1,10 +1,11 @@
 ---
 layout: post
-title: Gensim Text Classification
+title: My Pipeline of Text Classification Using Gensim's Doc2Vec and Logistic Regression
+premalink: /articles/aws-ec2-jupyter/
 ---
 
 <p align="center">
-<img src="../images/gensim_header.png">
+<img src="/images/gensim_header.png">
 </p>
 
 # My Pipeline of Text Classification Using Gensim's Doc2Vec and Logistic Regression
