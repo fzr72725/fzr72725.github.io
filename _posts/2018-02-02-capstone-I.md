@@ -1,3 +1,8 @@
+---
+layout: post
+premalink: /articles/capstone-part-one/
+---
+
 # Naked Word: Nationalities of World Language
 ## Part One: Feature Engineering -- Syntactic and Ad-hoc
 
@@ -100,6 +105,12 @@ df_0['DT_pass_cnt'] = df_0['DT_archs'].apply(lambda x: [len([dep for dep in s.sp
 - `DT_mark_cnt`: list of mark words in each sentence in an essay ([see definition of mark word here](www.google.com))
 ```
 df_0['DT_mark_cnt'] = df_0['DT_archs'].apply(lambda x: [len([dep for dep in s.split(' ') if dep=='mark']) for s in x])
+```
+Similarly, a couple of more numeric features can be calculated based on features above:
+```
+df_2['DT_ROOT_idx_mean'] = df_2['DT_ROOT_idx'].apply(lambda x: np.mean(x))
+df_2['DT_pass_cnt_sum'] = df_2['DT_pass_cnt'].apply(lambda x: np.sum(x))
+df_2['DT_mark_cnt_sum'] = df_2['DT_mark_cnt'].apply(lambda x: np.sum(x))
 ```
 
 Bag-of-Words (BOW) term frequency matrix has been a very common way to represent a text body with numeric values. However, in the case of NLI, simply transform the original text body of an essay into a term frequency matrix may not suit the text classification task well, given the fact that the model needs to generalize writing style characteristics instead of the actual content of the text bodies in each class. Therefore, I decided to use the idea of BOW and generate term frequency matrix based on the "syntactic-version" of the text body. In many previous academic works, this approach was mentioned as _POS n-gram_.

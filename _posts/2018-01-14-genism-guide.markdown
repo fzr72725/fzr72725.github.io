@@ -64,7 +64,7 @@ Train the Logistic Regression Classifier**
 
 Besides figuring out a proper way of extracting the document vectors, I also spent a lot of time on designing the general text classification pipeline. I had some confusion based on the observation that some people used training+testing documents to build the doc2vec model vocabulary and then extracted document vectors using that model. I really struggled to accept this approach, reason being: Recall the typical tf-idf classfication workflow:
 ```
-X = df_new['text_content']
+X = df_new['essay_content']
 y = df_new['label']
 X_train, X_test, y_train, y_test = train_test_split(X, y)
 
