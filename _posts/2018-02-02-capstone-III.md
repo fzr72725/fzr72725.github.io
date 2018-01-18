@@ -94,4 +94,4 @@ logreg = LogisticRegression()
 logreg.fit(X_train, y_train)
 y_pred = logreg.predict(X_test)
 ```
-doc2vec matrix gives me the best accuracy!
+So far, doc2vec matrix gives me the best accuracy: 0.815278

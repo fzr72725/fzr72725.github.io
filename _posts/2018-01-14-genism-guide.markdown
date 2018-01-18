@@ -36,6 +36,33 @@ Another tricky part: when passing a text body into `TaggedDocument`, the words h
 
 I used a document's class (the label to be classified) as the value of `tag`, and therefore they are not unique. In many tutorials I have seen people including some kind of unique id as part of their `tag`. To my understanding, the reason for this is just so that later one can retrieve a specific document vector using the tag. In my case, it is not necessary.
 
+**Updated Note on tag**: As I was cleaning my code for my recent capstone project, I think it is necessary to clarify the difference between having unique tags for each document and shared tags for documents that belong to the same class.
+If unique tags are used for creating tagged documents, then the doc2vec model will generate document vectors for EACH INDIVIDUAL document. See sample code:
+```
+print docs.shape
+>>(2880, 25)
+tagged = docs.apply(lambda r: TaggedDocument(words=simple_preprocess(r['essay_content']), \     tags=[r.label+'_'+str(r.doc_id)]), axis=1)
+
+sents = tagged.values
+model = Doc2Vec(sents, size=1, window=100, iter=20, dm=1)
+
+print model.docvecs.count
+>> 2008
+```
+
+On the other hand, if shared tags are used for document within each class (a common approach for text classification feature extraction) for creating tagged documents, then the doc2vec model will generate document vectors for EACH CLASS ONLY, so it will be a much smaller model. See sample code:
+```
+print docs.shape
+>>(2880, 25)
+tagged = docs.apply(lambda r: TaggedDocument(words=simple_preprocess(r['essay_content']), tags=[r.label]), axis=1)
+
+sents = tagged.values
+model = Doc2Vec(sents, size=1, window=100, iter=20, dm=1)
+
+print model.docvecs.count
+>> 9
+```
+
 2) Train the doc2vec model:
 ```
 def train_doc2vec_model(tagged_docs, window, size):
