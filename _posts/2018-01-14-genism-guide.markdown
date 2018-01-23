@@ -84,7 +84,7 @@ train_data, test_data = train_test_split(data)
 
 train_tagged = tag_docs(train_data, 'text_content')
 test_tagged = tag_docs(test_data, 'text_content')
-model = train_doc2vec_model(train_docs)
+model = train_doc2vec_model(train_tagged)
 
 y_train, X_train = vec_for_learning(model, train_tagged)
 y_test, X_test = vec_for_learning(model, test_tagged)
