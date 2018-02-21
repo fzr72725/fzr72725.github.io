@@ -7,7 +7,7 @@ premalink: /articles/capstone-part-two/
 ## Part Two: Feature Engineering -- Doc2Vec Representation
 
 Steps:
-1. Loading pandas DataFrame from [part one](www.google.com)
+1. Loading pandas DataFrame from [part one](https://github.com/fzr72725/fzr72725.github.io/blob/master/_posts/2018-02-02-capstone-I.md)
 ```
 df_0 = pd.read_pickle('../20180117_part_one.pkl')
 ```

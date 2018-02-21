@@ -23,16 +23,16 @@ y = df_0['label']
 X_train, X_test, y_train, y_test = train_test_split(X, y)
 ```
 2. Fit all numeric features into a RandomForestClassifier to examine feature importance
-![Feature Importance Plot](image.png)
+![Feature Importance Plot](/images/feature_imp.png)
 The order of feature importance (more to less):
 `avg_stc_length`, `DT_ROOT_idx_mean`, `unique_lemma`, `DT_max_dp_cnts_std`, `POS_adjv_repeat_rate`,
 `total_stc`, `POS_adjv_repeat_cnt`, `DT_mark_cnt_sum`, `DT_pass_cnt_sum`
 
 3. Fit all numeric features into a GradientBoostingClassifier to examine feature importance for identifying a specific class. This is extremely useful for the Japanese and Korean native language groups because essays from these two classes appear to be mis-classfied as one another very frequently.
-![Partial Dependence Plot JPN](image.png)
+![Partial Dependence Plot JPN](/images/jp_ko.png)
 Significant features to differentiate 'JPN' from 'KOR' (more to less):
 `POS_adjv_repeat_cnt`
-![image](image.png)
+
 
 4. Evaluate how mere numeric features perform with different algorithms
 - `LogisticRegression`: accuracy: 0.351129889756
@@ -41,7 +41,7 @@ Significant features to differentiate 'JPN' from 'KOR' (more to less):
 Although better then random guess, modeling result shows that merely using these numeric features does not produce great result. Therefore, need to move onto more sophisticated syntactic features.
 
 5. Use tf-idf matrix on pos tag body for essays to train classifiers
-As mentioned in [part one](www.googel.com), I have converted the original essay text into the corresponding syntactic tags as listed below:
+As mentioned in [part one](https://github.com/fzr72725/fzr72725.github.io/blob/master/_posts/2018-02-02-capstone-I.md), I have converted the original essay text into the corresponding syntactic tags as listed below:
 **DT_pos_join**
 **DT_archs_join**
 **DT_insent_pos_ngram**
