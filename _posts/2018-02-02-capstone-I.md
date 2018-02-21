@@ -44,14 +44,12 @@ df_0['total_stc'] = df_0['essay_content'].apply(lambda x: len([s for s in spc_nl
 ```
 _NOTE_
 I did some basic explortory data analysis on the three generated features. And there are some fascinating findings:
-```
-something something something darkside, something something something complete
-```
-
-[See source code here](www.google.com)
+![ens vs tha sentence length](/images/ens-tha.png)
+The plot above shows that compared to native speakers, learners from Thailand tend to write more much longer sentences. This may be explained by the fact that in Thai(the language) script, full-stop doesn't exist. Therefore, the learners brought this habit to their L2 (English) writing
+[See source code here](https://github.com/fzr72725/NLI/blob/master/notebooks/part_one_common_feature_extract.ipynb)
 
 3. Tagging, Parsing and Bag of Words
-It's intuitive to think that for native language identification(NLI), capturing features that reflecting syntactic characteristics is necessary. Therefore I generated POS tags and dependent tree elements for each essay in my corpus. For these features, I again used spaCy considering the tagging speed it offers compare to NLTK. The tagging convention of spaCy is following "?????". The columns are shown below:
+It's intuitive to think that for native language identification(NLI), capturing features that reflecting syntactic characteristics is necessary. Therefore I generated POS tags and dependent tree elements for each essay in my corpus. For these features, I again used spaCy considering the tagging speed it offers compare to NLTK. The tagging convention of spaCy is following **OntoNotes 5 version of the Penn Treebank tag set**. The columns are shown below:
 - `DT_pos`: Part-of-Speech tags for each word in an essay
 ```
 df_0['DT_pos'] = df_0['essay_content'].apply(lambda x: [' '.join([token.pos_ for token in spc_nlp(s.text)]) for s in spc_nlp(x.decode('utf-8')).sents])
@@ -87,14 +85,14 @@ df_0['POS_adjv_repeat_cnt'] = df_0['POS_adjv_body'].apply(lambda x: sum([v for k
 - `DT_max_dp_cnts`: list of max child-word count of each sentence for an essay
 ```
 df_0['DT_max_dp_cnts'] = df_0['essay_content'].apply(lambda x: [max([len([c for c in token.children]) \
-                                                                  for token in spc_nlp(s.text)]) \
-                                                                      for s in spc_nlp(x.decode('utf-8')).sents])
+for token in spc_nlp(s.text)]) \
+for s in spc_nlp(x.decode('utf-8')).sents])
 ```
 Based on this feature, several statistics can be calculated on the list for each essay. For example, I can calculate the standard deviation of max child-word counts of each sentence:
 ```
 df_2['DT_max_dp_cnts_std'] = df_2['DT_max_dp_cnts'].apply(lambda x: np.std(x))
 ```
-- `DT_ROOT_idx`: list of positions of the ROOT word in each sentence ([see definition of ROOT word here](www.google.com))
+- `DT_ROOT_idx`: list of positions of the ROOT word in each sentence ([see definition of ROOT word here](https://spacy.io/usage/linguistic-features))
 ```
 df_0['DT_ROOT_idx'] = df_0['DT_archs'].apply(lambda x: [[i for i,e in enumerate(s.split(' ')) if e=='ROOT'][0] for s in x])
 ```
@@ -102,7 +100,7 @@ df_0['DT_ROOT_idx'] = df_0['DT_archs'].apply(lambda x: [[i for i,e in enumerate(
 ```
 df_0['DT_pass_cnt'] = df_0['DT_archs'].apply(lambda x: [len([dep for dep in s.split(' ') if dep[-4:]=='pass']) for s in x])
 ```
-- `DT_mark_cnt`: list of mark words in each sentence in an essay ([see definition of mark word here](www.google.com))
+- `DT_mark_cnt`: list of mark words in each sentence in an essay ([see definition of mark word here](https://spacy.io/usage/linguistic-features))
 ```
 df_0['DT_mark_cnt'] = df_0['DT_archs'].apply(lambda x: [len([dep for dep in s.split(' ') if dep=='mark']) for s in x])
 ```
