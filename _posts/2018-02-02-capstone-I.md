@@ -72,39 +72,50 @@ nsubj ROOT acomp prep pobj mark nsubj advcl nsubj aux ccomp dobj prt cc conj pre
 `DT_pos` and `DT_archs` are the base features for other syntactic features that captures more detailed characteristics of one's writing style:
 ### DT_pos based
 - `POS_adjv_repeat_rate`: the portion of repeated adjectives and adverbs in an essay's overall vocabulary
+
 ```
 df_0['POS_adjv_body'] = df_0['essay_content'].apply(lambda x: [token.text.lower() for token in \ spc_nlp(x.decode('utf-8')) if (token.dep_=='amod')|(token.dep_=='advmod')])
 
 df_0['POS_adjv_repeat_rate'] = df_0['POS_adjv_body'].apply(lambda x: len([k for k, v in dict(Counter(x)).iteritems() if v>1])*1./len(x))
 ```
-- `POS_adjv_repeat_cnt`: total number of repeated adjectives and adverbs in an essay's
+
+- `POS_adjv_repeat_cnt`: total number of repeated adjectives and adverbs in an essay
+
 ```
 df_0['POS_adjv_repeat_cnt'] = df_0['POS_adjv_body'].apply(lambda x: sum([v for k, v in dict(Counter(x)).iteritems() if v>1]))
 ```
+
 ### DT_archs based
 - `DT_max_dp_cnts`: list of max child-word count of each sentence for an essay
+
 ```
 df_0['DT_max_dp_cnts'] = df_0['essay_content'].apply(lambda x: [max([len([c for c in token.children]) \
 for token in spc_nlp(s.text)]) \
 for s in spc_nlp(x.decode('utf-8')).sents])
 ```
+
 Based on this feature, several statistics can be calculated on the list for each essay. For example, I can calculate the standard deviation of max child-word counts of each sentence:
+
 ```
 df_2['DT_max_dp_cnts_std'] = df_2['DT_max_dp_cnts'].apply(lambda x: np.std(x))
 ```
 - `DT_ROOT_idx`: list of positions of the ROOT word in each sentence ([see definition of ROOT word here](https://spacy.io/usage/linguistic-features))
+
 ```
 df_0['DT_ROOT_idx'] = df_0['DT_archs'].apply(lambda x: [[i for i,e in enumerate(s.split(' ')) if e=='ROOT'][0] for s in x])
 ```
 - `DT_pass_cnt`: list of passive words in each sentence in an essay
+
 ```
 df_0['DT_pass_cnt'] = df_0['DT_archs'].apply(lambda x: [len([dep for dep in s.split(' ') if dep[-4:]=='pass']) for s in x])
 ```
 - `DT_mark_cnt`: list of mark words in each sentence in an essay ([see definition of mark word here](https://spacy.io/usage/linguistic-features))
+
 ```
 df_0['DT_mark_cnt'] = df_0['DT_archs'].apply(lambda x: [len([dep for dep in s.split(' ') if dep=='mark']) for s in x])
 ```
 Similarly, a couple of more numeric features can be calculated based on features above:
+
 ```
 df_2['DT_ROOT_idx_mean'] = df_2['DT_ROOT_idx'].apply(lambda x: np.mean(x))
 df_2['DT_pass_cnt_sum'] = df_2['DT_pass_cnt'].apply(lambda x: np.sum(x))
@@ -113,14 +124,17 @@ df_2['DT_mark_cnt_sum'] = df_2['DT_mark_cnt'].apply(lambda x: np.sum(x))
 
 Bag-of-Words (BOW) term frequency matrix has been a very common way to represent a text body with numeric values. However, in the case of NLI, simply transform the original text body of an essay into a term frequency matrix may not suit the text classification task well, given the fact that the model needs to generalize writing style characteristics instead of the actual content of the text bodies in each class. Therefore, I decided to use the idea of BOW and generate term frequency matrix based on the "syntactic-version" of the text body. In many previous academic works, this approach was mentioned as _POS n-gram_.
 - `DT_pos_join`: converting feature `DT_pos` into one string of pos tags of an essay
+
 ```
 df_0['DT_pos_join'] = df_0['DT_pos'].apply(lambda x: ' '.join(x))
 ```
 - `DT_archs_join`: converting feature `DT_archs` into one string of dependent tree tags of an essay
+
 ```
 df_0['DT_archs_join'] = df_0['DT_archs'].apply(lambda x: ' '.join(x))
 ```
 - `DT_insent_pos_ngram`: same as feature `DT_pos_join`, but only generate ngram terms within sentence boundary
+
 ```
 from nltk import ngrams
 def tag_sent_gram(s, n):
@@ -141,11 +155,13 @@ n = 4
 df_0['DT_insent_pos_ngram'] = df_0['DT_pos'].apply(lambda x: pwk.loop_body(x, n))
 ```
 - `DT_insent_arch_ngram`: same as feature `DT_archs_join`, but only generate ngram terms within sentence boundary
+
 ```
 n = 3
 df_0['DT_insent_arch_ngram'] = df_0['DT_archs'].apply(lambda x: pwk.loop_body(x, n))
 ```
-To transform a syntactic BOW feature into term frequency matrix, below is an exmaple:
+To transform a syntactic BOW feature into term frequency matrix, below is an example:
+
 ```
 X = df_0['DT_pos_join']
 y = df_0['label']
