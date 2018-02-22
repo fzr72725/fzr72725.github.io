@@ -8,6 +8,7 @@ premalink: /articles/capstone-part-three/
 
 Steps:
 1. Get all the acquired numeric features
+
 ```
 numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
 df_numeric = df_0.select_dtypes(include=numerics)
@@ -54,6 +55,7 @@ I have tried each of the four features separately, the result:
 **DT_insent_arch_ngram** accuracy: 0.645502590324
 
 6. Try stacking two tf-idf matrices and train the classifier
+
 ```
 X = df_0[['DT_pos_join','DT_insent_pos_ngram']]
 y = df_0['label']
@@ -79,6 +81,7 @@ y_pred = clf.predict(df_all_test)
 The classification accuracy did not improve much.
 
 7. Use doc2vec vectors for essays to train classifiers
+
 ```
 train_data, test_data = train_test_split(df_0, train_size=0.8)
 
