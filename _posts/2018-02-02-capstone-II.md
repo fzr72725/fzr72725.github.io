@@ -8,10 +8,12 @@ premalink: /articles/capstone-part-two/
 
 Steps:
 1. Loading pandas DataFrame from [part one](https://github.com/fzr72725/fzr72725.github.io/blob/master/_posts/2018-02-02-capstone-I.md)
+
 ```
 df_0 = pd.read_pickle('../20180117_part_one.pkl')
 ```
 2. Extract essay vector representation using doc2vec
+
 ```
 # Add tag to each document:
 def tag_docs(docs, col):
@@ -42,6 +44,7 @@ y_test, X_test = pwk.vec_for_learning(model, test_docs)
 ```
 
 3. To get a rough idea of how essay vectors perform on different text features (`essay_content`,`DT_pos`,`DT_insent_arch_ngram`, etc.), I used a basic LogisticRegression model and k-fold cross validation to examine the classification performance (accuracy score) when using different text features to generate the vector representations.
+
 ```
 train_data, test_data = train_test_split(df_0, train_size=0.8)
 col = 'essay_content'
