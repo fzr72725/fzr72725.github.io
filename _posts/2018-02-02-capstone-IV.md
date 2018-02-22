@@ -7,12 +7,10 @@ premalink: /articles/capstone-part-four/
 ## Part Four: GridSearch on Different Models Using Best Feature (Doc2Vec)
 
 1. Logistic Regression
-
 After gridsearch, the trained model using optimized hyper parameters produced the following confusion matrix:
 ![lr conf](/images/lr_doc2vec_conf.png)
 
 2. Random Forest Classifier
-
 Notes on random forest classifier gridsearch:
 `max_depth`: choices on max_depth should be reasonably away from extreme cases such as 2 or 3. For example, if we set
 'max_depth': [None, 2, 3], chances are the gridsearch will pick "None" (meaning that a tree can grow as deep as possibel) because it will give better performance compare to a forest of very shallow trees.
@@ -23,13 +21,11 @@ After gridsearch, the trained model using optimized hypter parameters produced t
 ![rf conf](/images/rf_doc2vec_conf.png)
 
 3. Gradient Boosting Classifier
-
 After gridsearch, the trained model using optimized hypter parameters produced the following confusion matrix:
 ![gb conf](/images/gb_doc2vec_conf.png)
 
 
 4. Ada Boost Classifier
-
 Note on Ada Boosting:
 Often, we can imitate AdaBoost learning by setting GradientBoostingClassifier(`loss`=`exponential`). But this trick only works for binary classification task. Since this is a multi-class case, I used sklearn's AdaBoostClassifier to do the training.
 
@@ -37,7 +33,6 @@ After gridsearch, the trained model using optimized hypter parameters produced t
 ![adb conf](/images/adb_doc2vec_conf.png)
 
 5. Voting System
-
 One common approach to boost the classification accuracy is to ensemble several classifiers. Since all three tree-based models produced very similar accuracy scores, I tried to stack them together via voting classifier.
 
 ```
