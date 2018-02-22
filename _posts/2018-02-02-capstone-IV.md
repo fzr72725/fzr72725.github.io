@@ -39,6 +39,7 @@ After gridsearch, the trained model using optimized hypter parameters produced t
 5. Voting System
 
 One common approach to boost the classification accuracy is to ensemble several classifiers. Since all three tree-based models produced very similar accuracy scores, I tried to stack them together via voting classifier.
+
 ```
 from sklearn.ensemble import VotingClassifier
 
