@@ -41,13 +41,13 @@ If unique tags are used for creating tagged documents, then the doc2vec model wi
 ```
 print docs.shape
 >>(2880, 25)
-tagged = docs.apply(lambda r: TaggedDocument(words=simple_preprocess(r['essay_content']), \     tags=[r.label+'_'+str(r.doc_id)]), axis=1)
+tagged = docs.apply(lambda r: TaggedDocument(words=simple_preprocess(r['essay_content']), tags=[r.label+'_'+str(r.doc_id)]), axis=1)
 
 sents = tagged.values
 model = Doc2Vec(sents, size=1, window=100, iter=20, dm=1)
 
 print model.docvecs.count
->> 2008
+>> 2880
 ```
 
 On the other hand, if shared tags are used for document within each class (a common approach for text classification feature extraction) for creating tagged documents, then the doc2vec model will generate document vectors for EACH CLASS ONLY, so it will be a much smaller model. See sample code:
@@ -78,8 +78,7 @@ I also had another confusion about whether the `tag` in the TaggedDocument objec
 ```
 def vec_for_learning(doc2vec_model, tagged_docs):
     sents = tagged_docs.values
-    targets, regressors = zip(\
-            *[(doc.tags[0], doc2vec_model.infer_vector(doc.words, steps=20)) for doc in sents])
+    targets, regressors = zip(*[(doc.tags[0], doc2vec_model.infer_vector(doc.words, steps=20)) for doc in sents])
     return targets, regressors
 ```
 This is one of the most confusing parts for me in the doc2vec training process. Many code examples did not use `infer_vector()` to "retrain" the document vectors. Instead, they used the trained vectors from the `doc2vec_model` directly as the final vector matrix. I think this is also one of the motivations for people to assign a unique tag to each document as I mentioned earlier.
