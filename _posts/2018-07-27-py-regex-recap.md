@@ -75,7 +75,6 @@ re.findall(<pattern>, <string>)
 re.findall('\d{2},', '22, 345, 45, 2, 98')
 >> ['22,', '45,', '45,']
 ```
-
 _if no grouping, returns all matches as a string list; if grouped, returns all groups as a string list. findall() will find all existing matches, unlike search() which stops after
 finding the first match_
 
@@ -87,7 +86,6 @@ Python does not allow direct nesting for repetition qualifiers like * or + or {m
 (?:a{6})* matches any multiple of six 'a' characters
 
 2. Greedy qualifiers:
-
  '\*', '+' and '?' are all greedy. Meaning that they match as much text as possible.
 example:
 pattern '<.\*>' on string '\<a\> b \<c\>' will treat the entire string as ONE match
@@ -102,7 +100,6 @@ re.findall('<.\*?>','<a>b<c>')
 ```
 
 3. {m,n}:
-
  Omitting m specifies a lower bound of zero, and omitting n specifies an
 infinite upper bound.
 `{,n}`
@@ -112,7 +109,6 @@ on the 6-character string 'aaaaaa', `a{3,5}` will match 5 'a' characters,
 while `a{3,5}?` will only match 3 characters.
 
 4. (?...):
-
  According to the documentation:
 
 >This is an extension notation (a '?' following a '(' is not meaningful otherwise). The first character after the '?' determines what the meaning and further syntax of the construct is.
