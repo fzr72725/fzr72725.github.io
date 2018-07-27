@@ -13,7 +13,7 @@ premalink: /articles/py-regex-recap/
 Although the grand theme applies to most situations, there are so many nuances about regex when it comes to different platforms. The syntax can be very different between regex in a text editor and a programming language. Looking at Python's regex specifically, there is also how regex functionality was structured as modules and objects.
 
 ### Confusion 1
-####re.compile(<pattern>) or re.search(<pattern>, <string>)
+#### re.compile(<pattern>) or re.search(<pattern>, <string>)
 When I first started working on my text mining project, I was too lazy to read through the python documentation about regex. And indeed most of the time stackoverflow will give pretty decent solutions for me to get by (I do follow the ten-tab role at the very least though!). But:
 To start using Python regex, some people do this:
 ```
@@ -30,7 +30,7 @@ I admit that I have used both for completing identical tasks. And it always bugg
 So now I get it: the first approach listed above relies on the compiled regex object, aka a regex object is created with the pattern first, then the object calls certain function to look for matching strings. The second approach on the other hand skipped the object creation. It used the module to call match functions directly. Recall that `re` is the module name. This behavior is the same as Python's `matplotlib` module. One can either create a `figure` object and use it to call plot functions or use `matplotlib.pyplot` module to call plot functions directly. See details [here](https://matplotlib.org/api/pyplot_summary.htmlm).
 
 ### Confusion 2
-####r'\w{2}\d{3}' vs '\w{2}\d{3}'
+#### r'\w{2}\d{3}' vs '\w{2}\d{3}'
 Similar to the above approaches, I have seen people using both in their regex code. See according to the documentation:
 >...The solution is to use Python’s raw string notation for regular expression patterns; backslashes are not handled in any special way in a string literal prefixed with 'r'. So r"\\n" is a two-character string containing '\\' and 'n', while "\\n" is a one-character string containing a newline. Usually patterns will be expressed in Python code using this raw string notation.
 
