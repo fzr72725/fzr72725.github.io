@@ -25,24 +25,30 @@ Here are all the steps one need to finish the task (These instructions are for m
 1. Make sure your environment has Java8 or above
 
 2. Download and install Solr:
-
-`brew install solr`
+```
+brew install solr
+```
 
 3. Navigate to solr directory:
-
-`cd /usr/local/Cellar/solr/7.x.x`
+```
+cd /usr/local/Cellar/solr/7.x.x
+```
 
 4. Start standalone Solr service:
-
-`bin/solr start -p 8983`
+```
+bin/solr start -p 8983
+```
 
 5. Create your search database:
-
-`bin/solr create_core -c my_core`
+```
+bin/solr create_core -c my_core
+```
 
 6. Index the text content for all documents:
+```
+bin/post -c my_core path_to_xml_file/all_text.xml
+```
 
-`bin/post -c my_core path_to_xml_file/all_text.xml`
 _Solr can index via many different file formats. I found xml file being the most straightforward. But this approash does require preprocess of putting all text files' content into one xml file with proper format. You can find
 example xml files under /usr/local/Cellar/solr/7.x.x/example/exampledocs._
 
