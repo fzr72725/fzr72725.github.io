@@ -8,14 +8,14 @@ premalink: /articles/py-regex-recap/
 <img src="/images/regex.jpg">
 </p>
 
-**TL;DR:** _Having been working with text for so many years, I thought I could call myself a regular expression veteran. I can do quite a few fancy things with merely regex in TextPad. However, my recent text mining project made me realize that I need to do some systematic review on regex in Python. In this article, I will walk through some key points about Python regex through a number of road blockers I encountered during my project._
+**TL;DR:** _Having been working with text for so many years, I thought I could call myself a regular expression veteran. I can do quite a few fancy things with merely regex in TextPad. However, my recent text mining project made me realize that I need to do some systematic review on regex in Python. In this article, I will walk through some key points about Python regex through a number of road blockers/confusion I encountered during my project._
 
-Although the grand theme applies to most situations, there are so many nuances about regex when it comes to different platforms. The syntax can be very different between regex in a text editor and a programming language. Looking at Python's regex specifically, there is also how regex functionality was structured as modules and objects.
+Although the same grand theme applies to most situations, there are so many nuances about regex when it comes to different platforms. The syntax can be quite different between regex in a text editor and a programming language.
 
 ### Confusion 1
-#### re.compile(<pattern>) or re.search(<pattern>, <string>)
-When I first started working on my text mining project, I was too lazy to read through the python documentation about regex. And indeed most of the time stackoverflow will give pretty decent solutions for me to get by (I do follow the ten-tab role at the very least though!). But:
-To start using Python regex, some people do this:
+#### re.compile(\<pattern\>) or re.search(\<pattern\>, \<string\>)
+When I first started working on my text mining project, I was too lazy to read through the python documentation about regex. And indeed most of the time stackoverflow gives pretty decent solutions for me to get by (I do follow the ten-tab rule at the very least though!). But:
+To start Python regex, some people do this:
 ```
 pattern = re.compile('-\d{2}-', re.IGNORECASE)
 match = pattern.search('the number: bc-22-a0')
@@ -24,17 +24,19 @@ while others do this:
 ```
 match = re.search('-\d{2}-', 'the number: bc-22-a0',re.IGNORECASE)
 ```
-I admit that I have used both for completing identical tasks. And it always bugged me that I was not certain about whether one is better than the other or what. So this is the first thing I turned to the Python documentation for clarification:
+I admit that I have used both for completing identical tasks. And it always bugged me that I was not certain about whether one is better than the other or what. So this was the first thing I turned to the Python documentation for clarification:
 > It is important to note that most regular expression operations are available as module-level functions and methods on compiled regular expressions. The functions are shortcuts that don’t require you to compile a regex object first, but miss some fine-tuning parameters.
 
-So now I get it: the first approach listed above relies on the compiled regex object, aka a regex object is created with the pattern first, then the object calls certain function to look for matching strings. The second approach on the other hand skipped the object creation. It used the module to call match functions directly. Recall that `re` is the module name. This behavior is the same as Python's `matplotlib` module. One can either create a `figure` object and use it to call plot functions or use `matplotlib.pyplot` module to call plot functions directly. See details [here](https://matplotlib.org/api/pyplot_summary.htmlm).
+So now I get it: the first approach listed above relies on the compiled regex object, aka a regex object is created with the pattern first, then the object calls certain function to look for matching strings. The second approach on the other hand skips the object creation. It used the module to call regex functions directly. Recall that `re` is the module name. This behavior is the same as the `matplotlib.pyplot` module. One can either create a `figure` object and use it to call plot functions or use `matplotlib.pyplot` module to call plot functions directly. See details [here](https://matplotlib.org/api/pyplot_summary.html).
 
 ### Confusion 2
 #### r'\w{2}\d{3}' vs '\w{2}\d{3}'
 Similar to the above approaches, I have seen people using both in their regex code. See according to the documentation:
 >...The solution is to use Python’s raw string notation for regular expression patterns; backslashes are not handled in any special way in a string literal prefixed with 'r'. So r"\\n" is a two-character string containing '\\' and 'n', while "\\n" is a one-character string containing a newline. Usually patterns will be expressed in Python code using this raw string notation.
 
-I personally think that this statement is a bit confusing. Basically it is saying that if you mark your string literal as a raw string literal (using r') then the python interpreter will not change the representation of that string before putting it into memory. **But once they've been parsed they are stored exactly the same way. This means that in memory there is no such thing as a raw string. Both the following strings are stored identically in memory with no concept of whether they were raw or not.**
+I personally think that this statement is a bit confusing because it gives people the impression that if using `re.compile(r'\d')`, the regex will match literally a backslash and a letter "d". But that's not the case.
+
+Basically it is saying that if you mark your string literal as a raw string literal (using r') then the python interpreter will not change the representation of that string before putting it into memory. **But once they've been parsed they are stored exactly the same way. This means that in memory there is no such thing as a raw string. Both the following strings are stored identically in memory with no concept of whether they were raw or not.**
 `r'\d'` and `'\\d'` will be treated the same pattern (a digit character) by re.func(). `r'\d'` does not mean that re.func() will see one backslash and one letter "d".
 
 In summary, in many situations, `r'...'` and `'...'` means the same pattern. One needs to understand how exactly these two ways work differently to pick the right one for a specific situation.
