@@ -117,7 +117,7 @@ while `a{3,5}?` will only match 3 characters.
 
 >This is an extension notation (a '?' following a '(' is not meaningful otherwise). The first character after the '?' determines what the meaning and further syntax of the construct is.
 
- 4.1 (?:...)
+    4.1 (?:...)
 
  non-capturing version of parentheses (means it won't be treated as a group)
 This can be useful for:
