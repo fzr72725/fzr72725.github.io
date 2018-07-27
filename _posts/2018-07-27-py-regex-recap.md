@@ -117,7 +117,7 @@ while `a{3,5}?` will only match 3 characters.
 
 >This is an extension notation (a '?' following a '(' is not meaningful otherwise). The first character after the '?' determines what the meaning and further syntax of the construct is.
 
- 1) (?:...)
+ 4.1 (?:...)
 
  non-capturing version of parentheses (means it won't be treated as a group)
 This can be useful for:
@@ -126,7 +126,7 @@ This can be useful for:
 * OR pattern
 `(?:january|feburary|march)`
 
- 2) (?=...)
+ 4.2 (?=...)
 
  if ... matches next
 `Isaac (?=Asimov)` will match 'Isaac ' only if it’s followed by 'Asimov'.
@@ -134,7 +134,7 @@ This can be useful for:
 re.findall('Isaac ?(?=Asimov)','Isaac Asimov')
 >> ['Isaac ']
 ```
- 3) (?!...)
+ 4.3 (?!...)
 
  if ... doesn't match next
 `Isaac (?!Asimov)` will match 'Isaac ' only if it’s not followed by 'Asimov'.
@@ -143,14 +143,14 @@ re.findall('Isaac ?(?=Asimov)','Isaac Asimov')
 re.findall('Isaac ?(?!Asimov)','Isaac something')
 >> ['Isaac ']
 ```
- 4) (?<=...)
+ 4.4 (?<=...)
 
  if ... matches the preceded string
 ```
 re.findall('(?<=abc)def', 'abcdef')
 >> ['def']
 ```
- 5) (?<!...)
+ 4.5 (?<!...)
 
  if ... doesn't match the preceded string
 ```
