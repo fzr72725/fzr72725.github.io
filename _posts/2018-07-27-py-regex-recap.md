@@ -53,10 +53,7 @@ match = re.search('(\d{2})[^\d]*(\d{2})', 'this is 222, 33, 6.')
 print match.groups()
 >> ('22', '33')
 ```
-
-_search() only returns the first match, as oppose to all matches as findall()'s behavior._  
-
-_search() returns a Match object which has a bunch of attributes and functions. Often we can keep and  get the matched content via grouping_
+_search() only returns the first match, as oppose to all matches as findall()'s behavior. search() returns a Match object which has a bunch of attributes and functions. Often we can keep and  get the matched content via grouping_
 
 2. re.match():
 ```
@@ -68,11 +65,8 @@ match2 = re.match('^.\*(\d{2})[^\d]*(\d{2})', 'this is 222, 33, 6.')
 print match2.groups()
 >> ('22', '33')
 ```
-
 _match1 returns None because match() has to find something from the very
-beginning of the string_  
-
-_match2 returns a match object because it finds something from the very
+beginning of the string. match2 returns a match object because it finds something from the very
 beginning_
 
 3. re.findall()
@@ -82,9 +76,7 @@ re.findall('\d{2},', '22, 345, 45, 2, 98')
 >> ['22,', '45,', '45,']
 ```
 
-_if no grouping, returns all matches as a string list; if grouped, returns all groups as a string list_  
-
-_findall() will find all existing matches, unlike search() which stops after
+_if no grouping, returns all matches as a string list; if grouped, returns all groups as a string list. findall() will find all existing matches, unlike search() which stops after
 finding the first match_
 
 ### Confusion 4
