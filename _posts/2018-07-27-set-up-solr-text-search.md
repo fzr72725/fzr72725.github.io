@@ -8,19 +8,19 @@ premalink: /articles/solr-text-search-setup/
 <img src="/images/solr.png">
 </p>
 
-**TL;DR:** _In my recent text mining projects, there are many cases that make me wonder if utilizing an out-of-box full text search solution can speed up and stream-line the process. Having a bit knowledge about Solr+Lucene - one of the most popular open source software of the Apache software family - I decided to give Solr a try. In this article, I will walk through how to quicly set up a full text search engine on a local machine that serves certain text mining tasks pretty well._
+**TL;DR:** _In my recent text mining projects, there are many cases that make me wonder if utilizing an out-of-box full text search solution can speed up and stream-line the process. Having a bit knowledge about Solr+Lucene - one of the most popular open source software solutions of the Apache software family - I decided to give it a try. In this article, I will walk through how to quickly set up a full text search engine on a local machine that serves certain text mining tasks pretty well._
 
 ### Use Case:
-#### Categorize documents using specific text content in document
+#### Categorizing documents using specific text content in documents
 
-For my most recent text mining task, I had about 7000 text documents which needed to be classified as "Insurer" or "Non-Insurer" related. To identify the correct category, the client asked us to use document template edition information in the document text content. For example: all templates produced in May 2001/ April 2007/ July 2010 are for "Insurer" category, while all templates produced in August 2005/ January 2010 are for "Non-Insurer".
+For my most recent text mining task, I had about 7000 text documents to be classified as "Insurer" or "Non-Insurer" related. To identify the correct class, the client asked us to use document template edition information in the document text content. For example: all templates produced in May 2001, April 2007 or July 2010 are for "Insurer" category, while all templates produced in August 2005 or January 2010 are for "Non-Insurer".
 
-Therefore, we can search through the documents and mark a document as "Insurer" or "Non-Insurer" based on what edition date there is. Obviously we can use Python and regular expression to do that. But this process is so straight forward that I believe leveraging existing tool can be more straightforward and less error-prone. For this specific task, I think Solr is perfect.
+Therefore, we can search through the documents and mark a document as "Insurer" or "Non-Insurer" based on what edition date it contains. Obviously we can use Python and regular expression to do that. But the task logic is so straightforward that I believe that existing tool can make the process more efficient and less error-prone. For this specific task, I think Solr is perfect.
 
 ### Solution
 #### Set Up Solr and Index the Text Files
 
-Here are all the steps one need to finish the task (These instructions are for mac environment. For Windows, it will be a bit different but very similar):
+Here are all the steps one need to finish the task (These instruction steps are for mac environment. For Windows, it will be a bit different but very similar):
 
 1. Make sure your environment has Java8 or above
 
