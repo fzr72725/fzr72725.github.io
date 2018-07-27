@@ -20,7 +20,7 @@ Therefore, we can search through the documents and mark a document as "Insurer" 
 ### Solution
 #### Set Up Solr and Index the Text Files
 
-Here are all the steps one need to finish the task (These instruction steps are for mac environment. For Windows, it will be a bit different but very similar):
+Here are all the steps one need to finish the task (These instruction steps are for Mac environment. For Windows, it will be a bit different but very similar):
 
 1. Make sure your environment has Java8 or above
 
