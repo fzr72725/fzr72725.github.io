@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Set Up A Working Text Search Engine in 10 minutes
+title: Set Up A Working Text Search Engine in 10 Minutes
 premalink: /articles/solr-text-search-setup/
 ---
 
