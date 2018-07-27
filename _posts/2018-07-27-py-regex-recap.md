@@ -155,7 +155,6 @@ re.findall(r'(?<!-) \w+', 'spam egg')
 ```
 
 5. \b
-
  matches the beginning or end of a word. This is particularly useful when you want to look for words
 ```
 re.findall(r'\bfoo\b', 'foo bar')
