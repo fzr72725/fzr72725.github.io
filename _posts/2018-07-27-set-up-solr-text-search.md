@@ -83,6 +83,6 @@ chmod +x category_search.sh
 
 9. Now all the search results are in csv file format. Mission Accomplished!
 
-This is a very simple domestration of what Solr can do. The solution of SOlr and Lucence offers many things way beyond things mentioned here. I hope that we can continue to leverage search engines like Solr or Elastic Search( another open source app that sits on Lucence) for our text mining projects.
+This is a very simple demonstration of what Solr can do. The solution of Solr and Lucence offers many things way beyond things mentioned here. I hope that we can continue to leverage search engines like Solr or Elasticsearch (another open source app that sits on Lucence) for our text mining projects.
 
 Happy searching!
