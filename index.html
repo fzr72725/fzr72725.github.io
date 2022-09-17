@@ -1,20 +1,50 @@
----
-layout: default
----
+<!DOCTYPE html>
+<html lang="en">
 
-<h2>A Start</h2>
-<p>
-With a strong conviction for continuous learning, I love writing about things I just learned.
-It is a great way to validate how well I grasp the knowledge. Moreover, I believe that by sharing what I learned with others, the audience and I will inspire each other.
-Therefore, I decided to start this site to put all my learning notes here for this sharing purpose.
-</p>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<h2>Articles</h2>
-<ul class="posts">
-  {% for post in site.posts %}
-    <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
-  {% endfor %}
-</ul>
+    </style>
+</head>
+
+<body>
+    <header class="main-head">
+        <nav class="main-nav">
 
 
-<!--h1>Technical Notes On Machine Learning and Math and Python and So On (coming soon)</h1-->
+                <li><a href="index.html"> Home</a></li>
+                <li><a href="Project-NLP/index.html"> NLP</a></li>
+                <li><a href="Project-Mash/index.html"> Music</a></li>
+                <!-- <li class="icon-search"><i class="fa fa-search" aria-hidden="true"></i></li> -->
+
+        </nav>
+        <h1></h1>
+        <h1></h1>
+        <h1></h1>
+        <!-- <button class="btn">&#9658;</button> -->
+    </header>
+    <section class="content-section container">
+        <h2 class="">Oh you made it!</h2>
+        <div>
+            <div class="track-row">
+            </div>
+
+        </div>
+    </section>
+    <footer class="main-footer">
+      <a href="https://github.com/fzr72725" target="_blank"><button class="btn-header">Github
+              Profile</button></a><br><br>
+    </footer>
+
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
