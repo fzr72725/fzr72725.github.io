@@ -137,8 +137,14 @@ footer li a:hover {
     background-color: darkslategray;
 }
 
-.track-row {
+.header-row {
     border-bottom: 1px solid black;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+
+}
+
+.track-row {
     padding-bottom: 1em;
     margin-bottom: 1em;
 
