@@ -1,8 +1,3 @@
----
-layout: post
-premalink: /articles/capstone-part-two/
----
-
 # Naked Word: Nationalities of World Language
 ## Part Two: Feature Engineering -- Doc2Vec Representation
 

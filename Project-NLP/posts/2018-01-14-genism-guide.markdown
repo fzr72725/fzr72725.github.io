@@ -1,13 +1,3 @@
----
-layout: post
-title: My Pipeline of Text Classification Using Gensim's Doc2Vec and Logistic Regression
-premalink: /articles/aws-ec2-jupyter/
----
-
-<p align="center">
-<img src="/images/gensim_books.jpg">
-</p>
-
 **TL;DR:** _In this article, I walked through my entire pipeline of performing text classification using Doc2Vec vector extraction and logistic regression. Gensim is relatively new, so I'm still learning all about it. By no means I'm the gensim expert, but I figured that if I share my experience on this specific task, it will hopefully provide one more perspective to those who are new and trying to understand word2vec/doc2vec modeling._
 
 For my most recent NLP project, I looked into one of the very well-known word2vec implementations -- gensim's Doc2Vec -- to extract features out of the text bodies in my data set. My goal was to eventually get a logistic regression model trained by the doc2vec feature that is able to classify unseen documents. Therefore, the model's ability to generalize is important in this case.

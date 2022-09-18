@@ -1,8 +1,3 @@
----
-layout: post
-premalink: /articles/capstone-part-four/
----
-
 # Naked Word: Nationalities of World Language
 ## Part Four: GridSearch on Different Models Using Best Feature (Doc2Vec)
 

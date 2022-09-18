@@ -1,8 +1,3 @@
----
-layout: post
-premalink: /articles/capstone-part-three/
----
-
 # Naked Word: Nationalities of World Language
 ## Part Three: Feature Selection and Modeling
 

@@ -1,8 +1,3 @@
----
-layout: post
-premalink: /articles/capstone-part-one/
----
-
 # Naked Word: Nationalities of World Language
 ## Part One: Feature Engineering -- Syntactic and Ad-hoc
 
