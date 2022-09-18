@@ -1,13 +1,3 @@
----
-layout: post
-title: Set Up A Working Text Search Engine in 10 Minutes
-premalink: /articles/solr-text-search-setup/
----
-
-<p align="center">
-<img src="/images/solr.png">
-</p>
-
 **TL;DR:** _In my recent text mining projects, there are many cases that make me wonder if utilizing an out-of-box full text search solution can speed up and stream-line the process. Having a bit knowledge about Solr+Lucene - one of the most popular open source software solutions of the Apache software family - I decided to give it a try. In this article, I will walk through how to quickly set up a full text search engine on a local machine that serves certain text mining tasks pretty well._
 
 ### Use Case:

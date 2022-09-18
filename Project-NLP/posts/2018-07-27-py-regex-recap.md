@@ -1,13 +1,3 @@
----
-layout: post
-title: So I Thought I Knew Regex
-premalink: /articles/py-regex-recap/
----
-
-<p align="center">
-<img src="/images/regex.jpg">
-</p>
-
 **TL;DR:** _Having been working with text for so many years, I thought I could call myself a regular expression veteran. I can do quite a few fancy things with merely regex in TextPad. However, my recent text mining project made me realize that I need to do some systematic review on regex in Python. In this article, I will walk through some key points about Python regex through a number of road blockers/confusion I encountered during my project._
 
 Although the same grand theme applies to most situations, there are so many nuances about regex when it comes to different platforms. The syntax can be quite different between regex in a text editor and a programming language.
