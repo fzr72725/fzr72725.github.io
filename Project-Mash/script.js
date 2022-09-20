@@ -1,11 +1,12 @@
 var btn1 = document.getElementById("btn1");
 var btn2 = document.getElementById("btn2");
-// var btn3 = document.getElementById("btn3");
+var btn3 = document.getElementById("btn3");
 // var btn4 = document.getElementById("btn4");
 // var btn5 = document.getElementById("btn5");
 // var btn6 = document.getElementById("btn6");
 var mash1=new Audio("music/zfirst_mash_njoi_tiga.mp3");
 var orig_njoi=new Audio("music/Century Masters (feat. Luvain) - N-Joi - [musicsmix.com].mp3");
+var mash2=new Audio("music/illusion_sample.mp3");
 // var Age19=new Audio("music/Age-19-Jass-Manak.mp3");
 // var letMeDown = new Audio("music/Let-Me-Down-Slowly(PaglaSongs).mp3");
 // var Animal= new Audio("music/Maroon 5 Animals.mp3 Song Download.mp3");
@@ -18,6 +19,7 @@ var currentMusicPlayed = 0;
 var currentChange = 0;
 var change_btn1 = 0;
 var change_btn2 = 0;
+var change_btn3 = 0;
 
 
 btn1.onclick = function()
@@ -54,6 +56,25 @@ btn2.onclick = function()
       else{
      orig_njoi.pause();
      change_btn2.innerHTML = "&#9658;";
+    }
+}
+
+btn3.onclick = function()
+{
+    change_btn3 = document.getElementById("btn3");
+    if(mash2.paused == true){
+      if(currentMusicPlayed != 0){
+        currentMusicPlayed.pause();
+        currentChange.innerHTML = "&#9658;";
+      }
+    mash2.play();
+    currentMusicPlayed = mash2;
+    currentChange = change_btn3;
+    change_btn3.innerHTML = "&#9724;";
+      }
+      else{
+     mash2.pause();
+     change_btn3.innerHTML = "&#9658;";
     }
 }
 // btn3.onclick = function()
