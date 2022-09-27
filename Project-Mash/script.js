@@ -4,9 +4,12 @@ var btn3 = document.getElementById("btn3");
 // var btn4 = document.getElementById("btn4");
 // var btn5 = document.getElementById("btn5");
 // var btn6 = document.getElementById("btn6");
-var mash1=new Audio("music/zfirst_mash_njoi_tiga.mp3");
+
+//var mash1=new Audio("music/zfirst_mash_njoi_tiga.mp3");
+
+var mash1=new Audio("https://tracks1.s3.us-west-1.amazonaws.com/zfirst_mash_njoi_tiga.mp3");
 var orig_njoi=new Audio("music/Century Masters (feat. Luvain) - N-Joi - [musicsmix.com].mp3");
-var mash2=new Audio("music/illusion_sample.mp3");
+var mash2=new Audio("https://tracks1.s3.us-west-1.amazonaws.com/illusion_sample.mp3");
 // var Age19=new Audio("music/Age-19-Jass-Manak.mp3");
 // var letMeDown = new Audio("music/Let-Me-Down-Slowly(PaglaSongs).mp3");
 // var Animal= new Audio("music/Maroon 5 Animals.mp3 Song Download.mp3");
