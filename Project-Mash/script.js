@@ -1,22 +1,35 @@
 var btn1 = document.getElementById("btn1");
 var btn2 = document.getElementById("btn2");
 var btn3 = document.getElementById("btn3");
-// var btn4 = document.getElementById("btn4");
-// var btn5 = document.getElementById("btn5");
-// var btn6 = document.getElementById("btn6");
 
-//var mash1=new Audio("music/zfirst_mash_njoi_tiga.mp3");
 
-var mash1=new Audio("https://tracks1.s3.us-west-1.amazonaws.com/zfirst_mash_njoi_tiga.mp3");
-var orig_njoi=new Audio("music/Century Masters (feat. Luvain) - N-Joi - [musicsmix.com].mp3");
-var mash2=new Audio("https://tracks1.s3.us-west-1.amazonaws.com/illusion_sample.mp3");
-// var Age19=new Audio("music/Age-19-Jass-Manak.mp3");
-// var letMeDown = new Audio("music/Let-Me-Down-Slowly(PaglaSongs).mp3");
-// var Animal= new Audio("music/Maroon 5 Animals.mp3 Song Download.mp3");
-// var fedUp=new Audio("music/Bazanji Fed Up .mp3")
+// added backend service to fetch mp3 pathes from AWS S3
 
-// array who has all musics as playlist
-var Musics = [] ;
+const params = {
+    method: 'GET',
+    //mode: 'no-cors',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+};
+var illusionPath
+const fetchPromise = fetch("http://localhost:8080/trackPath?trackId=1", params)
+    .then(res => res.json())
+    .then(data => illusionPath = data)
+
+// had to use Promise because fetch is async
+// Promise forces the fetch result to be available before the script exe goes further
+// this way illusionPath is actually assigned with the path
+// var mash2
+// Promise.resolve(fetchPromise)
+//     .then(() => mash2 = new Audio(illusionPath))
+
+var mash1 = new Audio("https://tracks1.s3.us-west-1.amazonaws.com/zfirst_mash_njoi_tiga.mp3");
+var orig_njoi =new Audio("music/Century Masters (feat. Luvain) - N-Joi - [musicsmix.com].mp3");
+var mash2 = new Audio("https://tracks1.s3.us-west-1.amazonaws.com/illusion_sample.mp3");
+
+
+
 // for target current played music in playlist Musics
 var currentMusicPlayed = 0;
 var currentChange = 0;
@@ -80,55 +93,3 @@ btn3.onclick = function()
      change_btn3.innerHTML = "&#9658;";
     }
 }
-// btn3.onclick = function()
-// {
-//     var change = document.getElementById("btn3");
-//     if(letMeDown.paused){
-//         letMeDown.play();
-//         change.innerHTML = "&#9724;";
-//       }else
-//       {
-//         letMeDown.pause();
-//         change.innerHTML = "&#9658;";
-//       }
-//
-// }
-// btn4.onclick = function()
-// {
-//     var change = document.getElementById("btn4");
-//     if(fedUp.paused){
-//         fedUp.play();
-//         change.innerHTML = "&#9724;";
-//       }else
-//       {
-//         fedUp.pause();
-//         change.innerHTML = "&#9658;";
-//       }
-//
-// }
-// btn5.onclick = function()
-// {
-//     var change = document.getElementById("btn5");
-//     if(Age19.paused){
-//         Age19.play();
-//         change.innerHTML = "&#9724;";
-//       }else
-//       {
-//         Age19.pause();
-//         change.innerHTML = "&#9658;";
-//       }
-//
-// }
-// btn6.onclick = function()
-// {
-//     var change = document.getElementById("btn6");
-//     if(Animal.paused){
-//         Animal.play();
-//         change.innerHTML = "&#9724;";
-//       }else
-//       {
-//         Animal.pause();
-//         change.innerHTML = "&#9658;";
-//       }
-//
-// }
