@@ -38,10 +38,10 @@ http://localhost:8000/tree/
 Here 8000 is the local port I chose in _step 3_.
 
 You may see a page pops out with text box asking for a password or token, like below:
-![Image1](/images/ask_token.png)
+![Jupyter Notebook token prompt](/Project-NLP/images/ask_token.png)
 
 In this case, just go to the terminal tab with the the remote Jupyter Notebook server you launched in _step 2_, and copy the token and paste it in the text box.
 
 ### 5. Now you have Jupyter Notebook client running on your local machine that is powered by an AWS EC2 instance!
-![Image2](/images/connected_jupy.png)
+![Connected Jupyter Notebook](/Project-NLP/images/connected_jupy.png)
 _You should see something like this_

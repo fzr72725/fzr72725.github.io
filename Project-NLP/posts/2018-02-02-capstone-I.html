@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Syntactic and ad hoc feature engineering for native-language classification.">
+    <title>Naked Word, Part I: Feature Engineering | Zee</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../nlp.css">
+    <link rel="stylesheet" href="../nlp-post.css">
+</head>
+<body class="quirky-home nlp-page nlp-post-page">
+    <header class="post-site-header">
+        <nav class="quirky-nav" aria-label="Primary navigation">
+            <a href="../../index.html">Home</a>
+            <a class="active" href="../index.html">NLP/AI</a>
+            <a href="../../Project-Mash/index.html">Music</a>
+            <a href="../../Project-Fun/index.html">Fun</a>
+            <a href="../../about.html">About</a>
+        </nav>
+    </header>
+    <main class="post-shell">
+        <article class="post-paper">
+            <div class="post-tape" aria-hidden="true"></div>
+            <header class="post-inline-header">
+                <p class="tiny-label">FIELD NOTE · 2018</p>
+                <h1>Naked Word, Part I: Feature Engineering</h1>
+                <div class="post-meta">
+                    <time datetime="2018-02-02">February 2, 2018</time><span aria-hidden="true">✦</span><a href="../articles.html">NLP notebook</a>
+                </div>
+            </header>
+            <h1>Naked Word: Nationalities of World Language</h1>
+<h2>Part One: Feature Engineering -- Syntactic and Ad-hoc</h2>
+<p>Steps:
+1. Loading all essays in their raw txt form</p>
+<pre><code>def load_data_multi(root):
+    all_docs = []
+    for path, sub, filen in os.walk(root):
+        for f in filen:
+            if f == '.DS_Store':
+                continue
+            doc_path = path+'/'+f
+            all_docs.append(doc_path)
+    print len(all_docs)
+    df = pd.DataFrame({'path':all_docs, 'doc_id':range(1,len(all_docs)+1)})
+    df['author_code'] = df['path'].apply(lambda x: x.split('/')[-1])
+    df['essay_content'] = df['path'].apply(read_file)
+    df['label'] = df['author_code'].apply(lambda x: x.split('_')[1])
+    return df
+</code></pre>
+<ol start="2">
+<li>Using spaCy to extract the following ad-hoc features:</li>
+</ol>
+<pre><code>import spacy
+spc_nlp = spacy.load('en')
+</code></pre>
+<ul>
+<li><code>unique_lemma</code>: Count of unique lemmatized words in an essay</li>
+</ul>
+<pre><code>df_0['unique_lemma'] = df_0['essay_content'].apply(lambda x: len(set([token.lemma_ for token in \ spc_nlp(x.decode('utf-8')) if token.is_punct==False])))
+</code></pre>
+<ul>
+<li><code>avg_stc_length</code>: Count of average sentence length (how many words are there in a sentence) of an essay</li>
+</ul>
+<pre><code>df_0['avg_stc_length'] = df_0['essay_content'].apply(lambda x: np.mean([len(s) for s in \ spc_nlp(x.decode('utf-8')).sents]))
+</code></pre>
+<ul>
+<li><code>total_stc</code>: Count of sentences in an essay</li>
+</ul>
+<pre><code>df_0['total_stc'] = df_0['essay_content'].apply(lambda x: len([s for s in spc_nlp(x.decode('utf-8')).sents]))
+</code></pre>
+<p><em>NOTE</em>
+I did some basic explortory data analysis on the three generated features. And there are some fascinating findings:
+<img alt="English and Thai sentence length comparison" src="/Project-NLP/images/ens-tha.png" />
+The plot above shows that compared to native speakers, learners from Thailand tend to write more much longer sentences. This may be explained by the fact that in Thai(the language) script, full-stop doesn't exist. Therefore, the learners brought this habit to their L2 (English) writing
+<a href="https://github.com/fzr72725/NLI/blob/master/notebooks/part_one_common_feature_extract.ipynb">See source code here</a></p>
+<ol start="3">
+<li>Tagging, Parsing and Bag of Words
+It's intuitive to think that for native language identification(NLI), capturing features that reflecting syntactic characteristics is necessary. Therefore I generated POS tags and dependent tree elements for each essay in my corpus. For these features, I again used spaCy considering the tagging speed it offers compare to NLTK. The tagging convention of spaCy is following <strong>OntoNotes 5 version of the Penn Treebank tag set</strong>. The columns are shown below:
+- <code>DT_pos</code>: Part-of-Speech tags for each word in an essay</li>
+</ol>
+<pre><code>df_0['DT_pos'] = df_0['essay_content'].apply(lambda x: [' '.join([token.pos_ for token in spc_nlp(s.text)]) for s in spc_nlp(x.decode('utf-8')).sents])
+</code></pre>
+<p>Example result:</p>
+<pre><code>It was important for me because it allowed me to take time off and travel to Japan.
+PROPN VERB ADJ ADP PRON ADP PRON VERB PRON PART VERB NOUN PART CCONJ VERB ADP PROPN PUNCT
+</code></pre>
+<ul>
+<li><code>DT_archs</code>: Dependent tree element labeling for each word in an essay</li>
+</ul>
+<pre><code>df_0['DT_archs'] = df_0['essay_content'].apply(lambda x: [' '.join([token.dep_ for token in spc_nlp(s.text)]) for s in spc_nlp(x.decode('utf-8')).sents])
+</code></pre>
+<p>Example result:</p>
+<pre><code>It was important for me because it allowed me to take time off and travel to Japan.
+nsubj ROOT acomp prep pobj mark nsubj advcl nsubj aux ccomp dobj prt cc conj prep pobj punct
+</code></pre>
+<p><code>DT_pos</code> and <code>DT_archs</code> are the base features for other syntactic features that captures more detailed characteristics of one's writing style:</p>
+<h3>DT_pos based</h3>
+<ul>
+<li><code>POS_adjv_repeat_rate</code>: the portion of repeated adjectives and adverbs in an essay's overall vocabulary</li>
+</ul>
+<pre><code>df_0['POS_adjv_body'] = df_0['essay_content'].apply(lambda x: [token.text.lower() for token in \ spc_nlp(x.decode('utf-8')) if (token.dep_=='amod')|(token.dep_=='advmod')])
+
+df_0['POS_adjv_repeat_rate'] = df_0['POS_adjv_body'].apply(lambda x: len([k for k, v in dict(Counter(x)).iteritems() if v&gt;1])*1./len(x))
+</code></pre>
+<ul>
+<li><code>POS_adjv_repeat_cnt</code>: total number of repeated adjectives and adverbs in an essay</li>
+</ul>
+<pre><code>df_0['POS_adjv_repeat_cnt'] = df_0['POS_adjv_body'].apply(lambda x: sum([v for k, v in dict(Counter(x)).iteritems() if v&gt;1]))
+</code></pre>
+<h3>DT_archs based</h3>
+<ul>
+<li><code>DT_max_dp_cnts</code>: list of max child-word count of each sentence for an essay</li>
+</ul>
+<pre><code>df_0['DT_max_dp_cnts'] = df_0['essay_content'].apply(lambda x: [max([len([c for c in token.children]) \
+for token in spc_nlp(s.text)]) \
+for s in spc_nlp(x.decode('utf-8')).sents])
+</code></pre>
+<p>Based on this feature, several statistics can be calculated on the list for each essay. For example, I can calculate the standard deviation of max child-word counts of each sentence:</p>
+<pre><code>df_2['DT_max_dp_cnts_std'] = df_2['DT_max_dp_cnts'].apply(lambda x: np.std(x))
+</code></pre>
+<ul>
+<li><code>DT_ROOT_idx</code>: list of positions of the ROOT word in each sentence (<a href="https://spacy.io/usage/linguistic-features">see definition of ROOT word here</a>)</li>
+</ul>
+<pre><code>df_0['DT_ROOT_idx'] = df_0['DT_archs'].apply(lambda x: [[i for i,e in enumerate(s.split(' ')) if e=='ROOT'][0] for s in x])
+</code></pre>
+<ul>
+<li><code>DT_pass_cnt</code>: list of passive words in each sentence in an essay</li>
+</ul>
+<pre><code>df_0['DT_pass_cnt'] = df_0['DT_archs'].apply(lambda x: [len([dep for dep in s.split(' ') if dep[-4:]=='pass']) for s in x])
+</code></pre>
+<ul>
+<li><code>DT_mark_cnt</code>: list of mark words in each sentence in an essay (<a href="https://spacy.io/usage/linguistic-features">see definition of mark word here</a>)</li>
+</ul>
+<pre><code>df_0['DT_mark_cnt'] = df_0['DT_archs'].apply(lambda x: [len([dep for dep in s.split(' ') if dep=='mark']) for s in x])
+</code></pre>
+<p>Similarly, a couple of more numeric features can be calculated based on features above:</p>
+<pre><code>df_2['DT_ROOT_idx_mean'] = df_2['DT_ROOT_idx'].apply(lambda x: np.mean(x))
+df_2['DT_pass_cnt_sum'] = df_2['DT_pass_cnt'].apply(lambda x: np.sum(x))
+df_2['DT_mark_cnt_sum'] = df_2['DT_mark_cnt'].apply(lambda x: np.sum(x))
+</code></pre>
+<p>Bag-of-Words (BOW) term frequency matrix has been a very common way to represent a text body with numeric values. However, in the case of NLI, simply transform the original text body of an essay into a term frequency matrix may not suit the text classification task well, given the fact that the model needs to generalize writing style characteristics instead of the actual content of the text bodies in each class. Therefore, I decided to use the idea of BOW and generate term frequency matrix based on the "syntactic-version" of the text body. In many previous academic works, this approach was mentioned as <em>POS n-gram</em>.
+- <code>DT_pos_join</code>: converting feature <code>DT_pos</code> into one string of pos tags of an essay</p>
+<pre><code>df_0['DT_pos_join'] = df_0['DT_pos'].apply(lambda x: ' '.join(x))
+</code></pre>
+<ul>
+<li><code>DT_archs_join</code>: converting feature <code>DT_archs</code> into one string of dependent tree tags of an essay</li>
+</ul>
+<pre><code>df_0['DT_archs_join'] = df_0['DT_archs'].apply(lambda x: ' '.join(x))
+</code></pre>
+<ul>
+<li><code>DT_insent_pos_ngram</code>: same as feature <code>DT_pos_join</code>, but only generate ngram terms within sentence boundary</li>
+</ul>
+<pre><code>from nltk import ngrams
+def tag_sent_gram(s, n):
+    result = []
+    n_grams = ngrams(s.split(' '), n)
+    for grams in n_grams:
+        result.append('_'.join(grams))
+    return result
+
+
+def loop_body(body, n):
+    result = []
+    for sent in body:
+        result.append(tag_sent_gram(sent, n))
+    return ' '.join(sum(result, []))
+
+n = 4
+df_0['DT_insent_pos_ngram'] = df_0['DT_pos'].apply(lambda x: pwk.loop_body(x, n))
+</code></pre>
+<ul>
+<li><code>DT_insent_arch_ngram</code>: same as feature <code>DT_archs_join</code>, but only generate ngram terms within sentence boundary</li>
+</ul>
+<pre><code>n = 3
+df_0['DT_insent_arch_ngram'] = df_0['DT_archs'].apply(lambda x: pwk.loop_body(x, n))
+</code></pre>
+<p>To transform a syntactic BOW feature into term frequency matrix, below is an example:</p>
+<pre><code>X = df_0['DT_pos_join']
+y = df_0['label']
+X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.8)
+
+vectorizer = TfidfVectorizer(lowercase=True, ngram_range=(3,3)).fit(X_train)
+X_train_dtm = vectorizer.transform(X_train)
+X_test_dtm = vectorizer.transform(X_test)
+</code></pre>
+        </article>
+        <aside class="post-margin-note" aria-label="Article navigation">
+            <p>you are here</p><strong>Naked Word, Part I</strong>
+            <a href="../articles.html">← all learning notes</a><a href="../index.html">← NLP home</a>
+        </aside>
+    </main>
+    <footer class="nlp-footer"><a href="../articles.html">← the notebook</a><span>thanks for reading this far</span></footer>
+</body>
+</html>

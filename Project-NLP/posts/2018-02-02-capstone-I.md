@@ -39,7 +39,7 @@ df_0['total_stc'] = df_0['essay_content'].apply(lambda x: len([s for s in spc_nl
 ```
 _NOTE_
 I did some basic explortory data analysis on the three generated features. And there are some fascinating findings:
-![ens vs tha sentence length](/images/ens-tha.png)
+![English and Thai sentence length comparison](/Project-NLP/images/ens-tha.png)
 The plot above shows that compared to native speakers, learners from Thailand tend to write more much longer sentences. This may be explained by the fact that in Thai(the language) script, full-stop doesn't exist. Therefore, the learners brought this habit to their L2 (English) writing
 [See source code here](https://github.com/fzr72725/NLI/blob/master/notebooks/part_one_common_feature_extract.ipynb)
 

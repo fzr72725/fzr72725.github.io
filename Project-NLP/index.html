@@ -1,50 +1,51 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NLP | Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Zee's notes and experiments in natural language processing.">
+    <title>Zee | NLP/AI Things</title>
     <link rel="stylesheet" href="../style.css">
-
-    </style>
+    <link rel="stylesheet" href="nlp.css">
 </head>
-
-<body>
-    <header class="main-head">
-        <nav class="main-nav">
-
-
-                <li><a href="../index.html"> Home</a></li>
-                <li><a href="articles.html"> Articles</a></li>
-                <li><a href="../about.html"> About</a></li>
-                <!-- <li class="icon-search"><i class="fa fa-search" aria-hidden="true"></i></li> -->
-
+<body class="quirky-home nlp-page">
+    <header class="nlp-hero">
+        <nav class="quirky-nav" aria-label="Primary navigation">
+            <a href="../index.html">Home</a>
+            <a class="active" href="index.html" aria-current="page">NLP/AI</a>
+            <a href="../Project-Mash/index.html">Music</a>
+            <a href="../Project-Fun/index.html">Fun</a>
+            <a href="../about.html">About</a>
         </nav>
-        <h1></h1>
-        <h1></h1>
-        <h1></h1>
-        <!-- <button class="btn">&#9658;</button> -->
+
+        <main class="nlp-main">
+            <section class="why-note" aria-labelledby="why-title">
+                <div class="tape" aria-hidden="true"></div>
+                <p class="tiny-label">why this exists</p>
+                <h1 id="why-title">A start</h1>
+                <p>With a strong conviction for continuous learning, I love writing about things I just learned. It’s a great way to test how well I actually understand them.</p>
+                <p>By sharing what I learn, I hope the audience and I can inspire each other. So this is where the notes live—messy edges and all.</p>
+            </section>
+
+            <section class="nlp-detours" aria-labelledby="detours-title">
+                <p class="tiny-label">recurring rabbit holes</p>
+                <h2 id="detours-title">Things I’ve poked at</h2>
+                <div class="topic-cloud" aria-label="NLP topics">
+                    <span>regex</span>
+                    <span>Doc2Vec</span>
+                    <span>text search</span>
+                    <span>classification</span>
+                    <span>tf-idf</span>
+                    <span>Jupyter</span>
+                </div>
+                <a class="scribble-button" href="articles.html">Open the notebook →</a>
+            </section>
+        </main>
     </header>
-    <section class="content-section container">
-        <h2 class="">A Start</h2>
-        <div>
-            <div class="track-row">
-                <p>With a strong conviction for continuous learning, I love writing about things I just learned. It is a great way to validate how well I grasp the knowledge. Moreover, I believe that by sharing what I learned with others, the audience and I will inspire each other. Therefore, I decided to start this site to put all my learning notes here for this sharing purpose.</p>
-            </div>
 
-        </div>
-    </section>
-    <footer class="main-footer">
-      <a href="https://github.com/fzr72725" target="_blank"><button class="btn-header">Github
-              Profile</button></a><br><br>
+    <footer class="nlp-footer">
+        <a href="../index.html">← back to the lobby</a>
+        <a href="https://github.com/fzr72725" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
     </footer>
-
-
-
-    <script src="script.js"></script>
-
 </body>
-
 </html>

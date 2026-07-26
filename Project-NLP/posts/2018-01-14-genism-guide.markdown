@@ -116,9 +116,9 @@ Enjoy vectorizing!
 
 -----
 ### Some good resources for learning doc2vec in general:
-[A gentle introduction to Doc2Vec](https://towardsdatascience.com/a-gentle-introduction-to-doc2vec-db3e8c0cce5e)
+[A gentle introduction to Doc2Vec](https://medium.com/wisio/a-gentle-introduction-to-doc2vec-db3e8c0cce5e)
 
-[Distributed Representations of Sentences and Documents](http://proceedings.mlr.press/v32/le14.pdf)
+[Distributed Representations of Sentences and Documents](https://proceedings.mlr.press/v32/le14.pdf)
 
 -----
 ### References:

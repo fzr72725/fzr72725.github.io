@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A quick practical guide to setting up Apache Solr for local text search.">
+    <title>Set Up a Working Text Search Engine in 10 Minutes | Zee</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../nlp.css">
+    <link rel="stylesheet" href="../nlp-post.css">
+</head>
+<body class="quirky-home nlp-page nlp-post-page">
+    <header class="post-site-header">
+        <nav class="quirky-nav" aria-label="Primary navigation">
+            <a href="../../index.html">Home</a>
+            <a class="active" href="../index.html">NLP/AI</a>
+            <a href="../../Project-Mash/index.html">Music</a>
+            <a href="../../Project-Fun/index.html">Fun</a>
+            <a href="../../about.html">About</a>
+        </nav>
+    </header>
+    <main class="post-shell">
+        <article class="post-paper">
+            <div class="post-tape" aria-hidden="true"></div>
+            <header class="post-inline-header">
+                <p class="tiny-label">FIELD NOTE · 2018</p>
+                <h1>Set Up a Working Text Search Engine in 10 Minutes</h1>
+                <div class="post-meta">
+                    <time datetime="2018-07-27">July 27, 2018</time><span aria-hidden="true">✦</span><a href="../articles.html">NLP notebook</a>
+                </div>
+            </header>
+            <p><strong>TL;DR:</strong> <em>In my recent text mining projects, there are many cases that make me wonder if utilizing an out-of-box full text search solution can speed up and stream-line the process. Having a bit knowledge about Solr+Lucene - one of the most popular open source software solutions of the Apache software family - I decided to give it a try. In this article, I will walk through how to quickly set up a full text search engine on a local machine that serves certain text mining tasks pretty well.</em></p>
+<h3>Use Case:</h3>
+<h4>Categorizing documents using specific text content in documents</h4>
+<p>For my most recent text mining task, I had about 7000 text documents to be classified as "Insurer" or "Non-Insurer" related. To identify the correct class, the client asked us to use document template edition information in the document text content. For example: all templates produced in May 2001, April 2007 or July 2010 are for "Insurer" category, while all templates produced in August 2005 or January 2010 are for "Non-Insurer".</p>
+<p>Therefore, we can search through the documents and mark a document as "Insurer" or "Non-Insurer" based on what edition date it contains. Obviously we can use Python and regular expression to do that. But the task logic is so straightforward that I believe that existing tool can make the process more efficient and less error-prone. For this specific task, I think Solr is perfect.</p>
+<h3>Solution</h3>
+<h4>Set Up Solr and Index the Text Files</h4>
+<p>Here are all the steps one need to finish the task (These instruction steps are for Mac environment. For Windows, it will be a bit different but very similar):</p>
+<ol>
+<li>
+<p>Make sure your environment has Java8 or above</p>
+</li>
+<li>
+<p>Download and install Solr:</p>
+</li>
+</ol>
+<pre><code>brew install solr
+</code></pre>
+<ol start="3">
+<li>Navigate to solr directory:</li>
+</ol>
+<pre><code>cd /usr/local/Cellar/solr/7.x.x
+</code></pre>
+<ol start="4">
+<li>Start standalone Solr service:</li>
+</ol>
+<pre><code>bin/solr start -p 8983
+</code></pre>
+<ol start="5">
+<li>Create your search database:</li>
+</ol>
+<pre><code>bin/solr create_core -c my_core
+</code></pre>
+<ol start="6">
+<li>Index the text content for all documents:</li>
+</ol>
+<pre><code>bin/post -c my_core path_to_xml_file/all_text.xml
+</code></pre>
+<p><em>Solr can index via many different file formats. I found xml file being the most straightforward. But this approash does require preprocess of putting all text files' content into one xml file with proper format. You can find
+example xml files under /usr/local/Cellar/solr/7.x.x/example/exampledocs.</em></p>
+<p>Up until now, all text file content is indexed into solr. Now we just need to run queries on those edition dates.</p>
+<p>For a starter, we can fire up the solr url at localhost to run some test query via Solr's UI:
+Go to any browser and put <code>http://localhost:8983/solr/#/my_core/query</code>
+You should be able to see something like this:
+<img alt="Apache Solr interface" src="/Project-NLP/images/solr_ui.png" /></p>
+<p>Then you can run some query using the "q" box:
+<img alt="Apache Solr query results" src="/Project-NLP/images/solr_q.png" />
+As you can see, there is one document matching the field value being queried.</p>
+<p>But this only works if we have very small amount of documents. In my case, there are 7000 documents and more than 25 different date terms I was going to search for. So I needed a more automated approach. To automate, we can run curl command for queries.</p>
+<ol start="7">
+<li>Bulk running curl query commands:</li>
+</ol>
+<pre><code>curl -o result_1.csv 'http://localhost:8983/solr/my_core/select?q=content:%22May%202001%20Edition%22&amp;fl=doc_id,%27Insurer%27&amp;rows=8000&amp;wt=csv&amp;csv.separator=%09'
+curl -o result_2.csv 'http://localhost:8983/solr/my_core/select?q=content:%22April%202007%20Edition%22&amp;fl=doc_id,%27Insurer%27&amp;rows=8000&amp;wt=csv&amp;csv.separator=%09'
+curl -o result_3.csv 'http://localhost:8983/solr/my_core/select?q=content:%22January%202010%20Edition%22&amp;fl=doc_id,%27Non-Insurer%27&amp;rows=8000&amp;wt=csv&amp;csv.separator=%09'
+...
+</code></pre>
+<p><em>Here we tell Solr to output the search result as a csv file separated by tab.</em>
+<em>I stored these curl commands in one shell script file so that I need to run the script just once.</em></p>
+<ol start="8">
+<li>Run the shell script:</li>
+</ol>
+<pre><code>chmod +x category_search.sh
+./category_search.sh
+</code></pre>
+<ol start="9">
+<li>Now all the search results are in csv file format. Mission Accomplished!</li>
+</ol>
+<p>This is a very simple demonstration of what Solr can do. The solution of Solr and Lucence offers many things way beyond things mentioned here. I hope that we can continue to leverage search engines like Solr or Elasticsearch (another open source app that sits on Lucence) for our text mining projects.</p>
+<p>Happy searching!</p>
+        </article>
+        <aside class="post-margin-note" aria-label="Article navigation">
+            <p>you are here</p><strong>Solr text search</strong>
+            <a href="../articles.html">← all learning notes</a><a href="../index.html">← NLP home</a>
+        </aside>
+    </main>
+    <footer class="nlp-footer"><a href="../articles.html">← the notebook</a><span>thanks for reading this far</span></footer>
+</body>
+</html>

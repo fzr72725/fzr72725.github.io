@@ -1,90 +1,66 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music | Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Zee's small stash of mashes, samples, and other sounds.">
+    <title>Zee | Music Things</title>
     <link rel="stylesheet" href="../style.css">
-
-    </style>
+    <link rel="stylesheet" href="music.css">
 </head>
-
-<body>
-    <header class="main-head">
-        <nav class="main-nav">
-                <li><a href="../index.html"> Home</a></li>
-                <li><a href="tutorials.html"> Tutorials</a></li>
-                <li><a href="../about.html"> About</a></li>
-                <li><a href="https://gofund.me/4fd67d8f"> Donate</a></li>
-                <!-- <li class="icon-search"><i class="fa fa-search" aria-hidden="true"></i></li> -->
-
+<body class="quirky-home music-page">
+    <header class="music-stage">
+        <nav class="quirky-nav" aria-label="Primary navigation">
+            <a href="../index.html">Home</a>
+            <a href="../Project-NLP/index.html">NLP/AI</a>
+            <a class="active" href="index.html" aria-current="page">Music</a>
+            <a href="../Project-Fun/index.html">Fun</a>
+            <a href="../about.html">About</a>
         </nav>
-        <h1></h1>
-        <h1></h1>
-        <h1></h1>
-        <!-- <button class="btn">&#9658;</button> -->
+
+        <main class="music-main">
+            <section class="music-note" aria-labelledby="music-title">
+                <div class="music-tape" aria-hidden="true"></div>
+                <p class="tiny-label">a very tiny catalog</p>
+                <h1 id="music-title">Mashlist</h1>
+                <p>Some things I glued together because they sounded better that way.</p>
+                <a class="music-side-link" href="tutorials.html">production notes-ish →</a>
+            </section>
+
+            <section class="track-stack" aria-label="Mash playlist">
+                <article class="music-track">
+                    <button class="track-play" type="button" data-audio-src="https://tracks1.s3.us-west-1.amazonaws.com/zfirst_mash_njoi_tiga.mp3" aria-label="Play CM and MD Mash">▶</button>
+                    <div class="track-info"><p>CM and MD Mash</p><span>Z · mash</span></div>
+                    <time datetime="2022-09-17">09.17.22</time>
+                </article>
+                <article class="music-track">
+                    <button class="track-play" type="button" data-audio-src="https://tracks1.s3.us-west-1.amazonaws.com/illusion_sample.mp3" aria-label="Play Illusion Sample">▶</button>
+                    <div class="track-info"><p>Illusion Sample</p><span>Z · sample</span></div>
+                    <time datetime="2022-09-19">09.19.22</time>
+                </article>
+                <article class="music-track">
+                    <button class="track-play" type="button" data-audio-src="https://tracks1.s3.us-west-1.amazonaws.com/so+I+want+you+intro+125.mp3" aria-label="Play So I Want You plus I Go Drums">▶</button>
+                    <div class="track-info"><p>So I Want You + I Go Drums</p><span>Z · mash</span></div>
+                    <time datetime="2022-10-05">10.05.22</time>
+                </article>
+            </section>
+
+            <section class="original-note" aria-labelledby="original-title">
+                <p class="tiny-label">the source pile</p>
+                <h2 id="original-title">Origlist</h2>
+                <article class="music-track original-track">
+                    <button class="track-play" type="button" data-audio-src="music/Century Masters (feat. Luvain) - N-Joi - [musicsmix.com].mp3" aria-label="Play Century Masters featuring Luvain">▶</button>
+                    <div class="track-info"><p>Century Masters <small>(feat. Luvain)</small></p><span>N-Joi · original</span></div>
+                    <time datetime="2022-09-17">09.17.22</time>
+                </article>
+            </section>
+        </main>
     </header>
-    <section class="content-section container">
-        <h2 class="">Mashlist</h2>
-        <div>
-            <div class="header-row">
-                <span class="track-date">Date</span>
-                <span class="track-title">title</span>
-                <span class="track-artist">Artist</span>
-            </div>
-            <div class="track-row">
-                <span class="track-date">Sept 17 2022</span>
-                <span class="track-title">CM and MD Mash</span>
-                <span class="track-artist">Z</span>
-                <button id="btn1" class="btn-play">&#9658;</button>
-                <audio id="mash1"></audio>
 
-            </div>
-            <div class="track-row">
-                <span class="track-date">Sept 19 2022</span>
-                <span class="track-title">Illusion Sample</span>
-                <span class="track-artist">Z</span>
-                <button id="btn3" class="btn-play">&#9658;</button>
-                <audio id="mash2"></audio>
-
-            </div>
-            <div class="track-row">
-                <span class="track-date">Oct 05 2022</span>
-                <span class="track-title">So I Want You + I Go Drums</span>
-                <span class="track-artist">Z</span>
-                <button id="btn4" class="btn-play">&#9658;</button>
-                <audio id="mash3"></audio>
-
-            </div>
-        </div>
-        <h2 class="">Origlist</h2>
-        <div>
-            <div class="header-row">
-                <span class="track-date">Date</span>
-                <span class="track-title">title</span>
-                <span class="track-artist">Artist</span>
-            </div>
-            <div class="track-row">
-                <span class="track-date">Sept 17 2022</span>
-                <span class="track-title">Century Masters (feat. Luvain)</span>
-                <span class="track-artist">N-Joi</span>
-                <button id="btn2" class="btn-play">&#9658;</button>
-                <audio id="orig_njoi"></audio>
-
-            </div>
-        </div>
-    </section>
-    <footer class="main-footer">
-      <a href="https://github.com/fzr72725" target="_blank"><button class="btn-header">Github
-              Profile</button></a><br><br>
+    <footer class="music-footer">
+        <span>headphones recommended</span>
+        <a href="https://github.com/fzr72725" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
     </footer>
-
-
-
-    <script src="script.js"></script>
-
+    <script src="script.js?v=2"></script>
 </body>
-
 </html>
