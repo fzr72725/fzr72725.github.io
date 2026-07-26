@@ -1,51 +1,179 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zee | Home</title>
-    <link rel="stylesheet" href="style.css">
-
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Zee's portfolio — data science, natural language processing, and creative web experiments.">
+  <meta name="theme-color" content="#f4f1e8">
+  <title>Zee — Data, language &amp; curious builds</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
+<body class="portfolio">
+  <a class="skip-link" href="#main">Skip to content</a>
 
-<body>
-    <header class="main-head">
-        <nav class="main-nav">
+  <header class="site-header">
+    <a class="wordmark" href="#top" aria-label="Zee, home">Z<span>—</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span></span><span></span><span></span><span class="sr-only">Menu</span>
+    </button>
+    <nav id="site-nav" aria-label="Primary navigation">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="Project-NLP/articles.html">Writing</a>
+      <a class="nav-cta" href="https://github.com/fzr72725" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
 
-
-                <li><a href="index.html"> Home</a></li>
-                <li><a href="Project-NLP/index.html"> NLP</a></li>
-                <li><a href="Project-Mash/index.html"> Music</a></li>
-                <li><a href="Project-Fun/index.html"> Fun</a></li>
-                <li><a href="about.html"> About</a></li>
-                <!-- <li class="icon-search"><i class="fa fa-search" aria-hidden="true"></i></li> -->
-
-        </nav>
-        <h1></h1>
-        <h1></h1>
-        <h1></h1>
-        <!-- <button class="btn">&#9658;</button> -->
-    </header>
-    <section class="content-section container">
-        <h2 class="">Oh hey you made it!</h2>
-        <div>
-            <div class="track-row">
-            </div>
-
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="status-dot"></span> Data science · NLP · Creative code</p>
+        <h1 id="hero-title">I turn messy ideas into <em>useful</em> things.</h1>
+        <p class="hero-lede">I’m Zee—a curious builder who works across language, machine learning, and the web. I like understanding how things work, then making that understanding tangible.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#work">Explore selected work <span aria-hidden="true">↓</span></a>
+          <a class="text-link" href="https://github.com/fzr72725" target="_blank" rel="noreferrer">View code on GitHub <span aria-hidden="true">↗</span></a>
         </div>
+      </div>
+      <aside class="hero-note" aria-label="A note from Zee">
+        <div class="goofy-crop">
+          <img src="images/background1.png" alt="The goofy panda drawing from Zee's original homepage" width="1140" height="426">
+        </div>
+        <p class="original-stamp mono-label">ORIGINAL HOMEPAGE ENERGY · PRESERVED</p>
+        <p class="mono-label">CURRENTLY CURIOUS ABOUT</p>
+        <p>Language, search, small tools, and the useful edges where technical work meets human behavior.</p>
+        <div class="scribble" aria-hidden="true">keep learning →</div>
+      </aside>
+      <div class="hero-index mono-label" aria-hidden="true">PORTFOLIO / 2026</div>
     </section>
-    <footer class="main-footer">
-      <a href="https://github.com/fzr72725" target="_blank"><button class="btn-header">Github
-              Profile</button></a><br><br>
-    </footer>
 
+    <section class="work section" id="work" aria-labelledby="work-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">01 / Selected work</p>
+          <h2 id="work-title">Built to learn.<br>Documented to share.</h2>
+        </div>
+        <p>A selection of technical and creative projects from the archive, reframed around the questions they explore.</p>
+      </div>
 
+      <article class="project project-featured">
+        <a class="project-visual visual-nlp" href="Project-NLP/articles.html" aria-label="Read the NLP project archive">
+          <div class="visual-grid" aria-hidden="true"></div>
+          <span class="visual-word word-one">Naked</span>
+          <span class="visual-word word-two">Word</span>
+          <span class="visual-chip chip-one">Doc2Vec</span>
+          <span class="visual-chip chip-two">TF–IDF</span>
+          <span class="visual-chip chip-three">Logistic regression</span>
+          <span class="visual-number">01</span>
+        </a>
+        <div class="project-copy">
+          <div class="project-meta mono-label"><span>Machine learning</span><span>4-part case study</span></div>
+          <h3>Naked Word: classifying the nationality of language</h3>
+          <p>An end-to-end NLP study comparing hand-engineered syntactic features with Doc2Vec representations, then evaluating multiple classifiers and tuning the strongest approach.</p>
+          <ul class="tag-list" aria-label="Technologies">
+            <li>Python</li><li>scikit-learn</li><li>Gensim</li><li>NLP</li>
+          </ul>
+          <a class="project-link" href="Project-NLP/articles.html">Read the case study archive <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
 
-    <script src="script.js"></script>
+      <div class="project-grid">
+        <article class="project project-card">
+          <a class="project-visual visual-search" href="Project-NLP/posts/2018-07-27-set-up-solr-text-search.md" aria-label="Read the Solr text search guide">
+            <span class="search-mark" aria-hidden="true"></span>
+            <div class="search-lines" aria-hidden="true"><i></i><i></i><i></i></div>
+            <span class="visual-number">02</span>
+          </a>
+          <div class="project-copy">
+            <div class="project-meta mono-label"><span>Information retrieval</span><span>Technical guide</span></div>
+            <h3>Building a working text search engine</h3>
+            <p>A practical walkthrough for indexing documents, querying text, and turning unstructured content into a searchable system with Apache Solr.</p>
+            <ul class="tag-list"><li>Solr</li><li>Search</li><li>Text data</li></ul>
+            <a class="project-link" href="Project-NLP/posts/2018-07-27-set-up-solr-text-search.md">Open the guide <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
 
+        <article class="project project-card">
+          <a class="project-visual visual-music" href="Project-Mash/index.html" aria-label="Open the Mashlist music player">
+            <div class="record" aria-hidden="true"><span></span></div>
+            <div class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <span class="visual-number">03</span>
+          </a>
+          <div class="project-copy">
+            <div class="project-meta mono-label"><span>Creative front end</span><span>Audio experiment</span></div>
+            <h3>Mashlist: a home for music experiments</h3>
+            <p>A lightweight browser-based player built to publish and organize original mashups outside the constraints of major audio platforms.</p>
+            <ul class="tag-list"><li>JavaScript</li><li>HTML audio</li><li>CSS</li></ul>
+            <div class="music-player" aria-label="Zee's music showcase">
+              <div class="player-heading">
+                <span class="mono-label">LISTEN / MASHES BY Z</span>
+                <span class="player-status mono-label" aria-live="polite">SELECT A TRACK</span>
+              </div>
+              <button class="track-button" type="button" data-audio-src="https://tracks1.s3.us-west-1.amazonaws.com/zfirst_mash_njoi_tiga.mp3">
+                <span class="track-play" aria-hidden="true">▶</span>
+                <span class="track-info"><strong>CM × Mind Dimension</strong><small>September 2022 · Mash</small></span>
+                <span class="track-time mono-label">01</span>
+              </button>
+              <button class="track-button" type="button" data-audio-src="https://tracks1.s3.us-west-1.amazonaws.com/illusion_sample.mp3">
+                <span class="track-play" aria-hidden="true">▶</span>
+                <span class="track-info"><strong>Illusion Sample</strong><small>September 2022 · Sample</small></span>
+                <span class="track-time mono-label">02</span>
+              </button>
+              <button class="track-button" type="button" data-audio-src="https://tracks1.s3.us-west-1.amazonaws.com/so+I+want+you+intro+125.mp3">
+                <span class="track-play" aria-hidden="true">▶</span>
+                <span class="track-info"><strong>So I Want You + I Go Drums</strong><small>October 2022 · Mash</small></span>
+                <span class="track-time mono-label">03</span>
+              </button>
+              <audio id="portfolio-audio" preload="none"></audio>
+            </div>
+            <a class="project-link" href="Project-Mash/index.html">Launch Mashlist <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="approach section" aria-labelledby="approach-title">
+      <p class="eyebrow">02 / How I work</p>
+      <h2 id="approach-title">Curiosity, made rigorous.</h2>
+      <div class="approach-grid">
+        <div><span class="step">01</span><h3>Find the real question</h3><p>Start with the behavior, constraint, or ambiguity that actually needs explaining.</p></div>
+        <div><span class="step">02</span><h3>Make it testable</h3><p>Turn assumptions into features, prototypes, and comparisons that can produce evidence.</p></div>
+        <div><span class="step">03</span><h3>Share the reasoning</h3><p>Document the path—not only the answer—so the work is useful beyond the final output.</p></div>
+      </div>
+    </section>
+
+    <section class="about section" id="about" aria-labelledby="about-title">
+      <div class="portrait-wrap">
+        <img src="images/me7.png" alt="Zee smiling outdoors, wearing headphones and a winter hat" width="780" height="860">
+        <span class="portrait-caption mono-label">HELLO FROM THE BUILDER</span>
+      </div>
+      <div class="about-copy">
+        <p class="eyebrow">03 / About</p>
+        <h2 id="about-title">Analytical brain.<br><em>Creative pulse.</em></h2>
+        <p class="about-lede">I believe the fastest way to understand something is to build with it—and the clearest test of understanding is being able to explain it.</p>
+        <p>That instinct has led me from text classification and search systems to browser audio experiments and long-form technical notes. Away from a screen, you’ll find me with books, art, wine, a jog, or a strong Star Wars opinion.</p>
+        <div class="language-row"><span class="mono-label">LANGUAGES</span><span>Mandarin</span><span>English</span></div>
+        <a class="button button-secondary" href="https://github.com/fzr72725" target="_blank" rel="noreferrer">See what I’m building <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <section class="contact section" aria-labelledby="contact-title">
+      <p class="eyebrow">04 / Let’s connect</p>
+      <h2 id="contact-title">Have an interesting<br>problem to solve?</h2>
+      <p>I’m always glad to meet thoughtful people working on useful, ambitious things.</p>
+      <a class="contact-link" href="https://github.com/fzr72725" target="_blank" rel="noreferrer">Start on GitHub <span aria-hidden="true">↗</span></a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="#top">Z<span>—</span></a>
+    <p>Built with curiosity and an unreasonable number of browser tabs.</p>
+    <div><a href="Project-NLP/articles.html">Writing</a><a href="https://github.com/fzr72725" target="_blank" rel="noreferrer">GitHub ↗</a></div>
+    <span class="mono-label">© <span id="year">2026</span> ZEE</span>
+  </footer>
+  <script src="script.js"></script>
 </body>
-
 </html>
