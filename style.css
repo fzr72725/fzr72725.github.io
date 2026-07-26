@@ -774,6 +774,7 @@ footer li a:hover {
 
 .hero-title-row { align-items: center; display: flex; gap: clamp(12px, 2vw, 26px); }
 .hero-hello h1 {
+    font-family: Georgia, "Times New Roman", serif;
     font-size: clamp(2.5rem, 5vw, 4.8rem);
     letter-spacing: -.045em;
     line-height: 1;
