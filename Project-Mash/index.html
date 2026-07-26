@@ -3,13 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Zee's small stash of mashes, samples, and other sounds.">
-    <title>Zee | Art Things</title>
+    <meta name="description" content="Zee's home for music, art collecting, and appreciation notes.">
+    <title>Zee | Art</title>
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="music.css">
 </head>
 <body class="quirky-home music-page">
-    <header class="music-stage">
+    <header class="music-stage art-hub-stage">
         <nav class="quirky-nav" aria-label="Primary navigation">
             <a href="../index.html">Home</a>
             <a href="../Project-NLP/index.html">NLP/AI/Eng</a>
@@ -17,50 +17,24 @@
             <a href="../Project-Fun/index.html">Fun</a>
             <a href="../about.html">About</a>
         </nav>
-
-        <main class="music-main">
-            <section class="music-note" aria-labelledby="music-title">
-                <div class="music-tape" aria-hidden="true"></div>
-                <p class="tiny-label">a very tiny catalog</p>
-                <h1 id="music-title">Mashlist</h1>
-                <p>Some things I glued together because they sounded better that way.</p>
-                <a class="music-side-link" href="tutorials.html">production notes-ish →</a>
+        <main class="art-hub">
+            <section class="art-hub-intro" aria-labelledby="art-title">
+                <p class="tiny-label">things worth making · things worth noticing</p>
+                <h1 id="art-title">Art, broadly.</h1>
+                <p>Sounds I make, objects I collect, and notes about things that make me stop and look twice.</p>
             </section>
-
-            <section class="track-stack" aria-label="Mash playlist">
-                <article class="music-track">
-                    <button class="track-play" type="button" data-audio-src="https://tracks1.s3.us-west-1.amazonaws.com/zfirst_mash_njoi_tiga.mp3" aria-label="Play CM and MD Mash">▶</button>
-                    <div class="track-info"><p>CM and MD Mash</p><span>Z · mash</span></div>
-                    <time datetime="2022-09-17">09.17.22</time>
-                </article>
-                <article class="music-track">
-                    <button class="track-play" type="button" data-audio-src="https://tracks1.s3.us-west-1.amazonaws.com/illusion_sample.mp3" aria-label="Play Illusion Sample">▶</button>
-                    <div class="track-info"><p>Illusion Sample</p><span>Z · sample</span></div>
-                    <time datetime="2022-09-19">09.19.22</time>
-                </article>
-                <article class="music-track">
-                    <button class="track-play" type="button" data-audio-src="https://tracks1.s3.us-west-1.amazonaws.com/so+I+want+you+intro+125.mp3" aria-label="Play So I Want You plus I Go Drums">▶</button>
-                    <div class="track-info"><p>So I Want You + I Go Drums</p><span>Z · mash</span></div>
-                    <time datetime="2022-10-05">10.05.22</time>
-                </article>
-            </section>
-
-            <section class="original-note" aria-labelledby="original-title">
-                <p class="tiny-label">the source pile</p>
-                <h2 id="original-title">Origlist</h2>
-                <article class="music-track original-track">
-                    <button class="track-play" type="button" data-audio-src="music/Century Masters (feat. Luvain) - N-Joi - [musicsmix.com].mp3" aria-label="Play Century Masters featuring Luvain">▶</button>
-                    <div class="track-info"><p>Century Masters <small>(feat. Luvain)</small></p><span>N-Joi · original</span></div>
-                    <time datetime="2022-09-17">09.17.22</time>
-                </article>
-            </section>
+            <div class="art-paths">
+                <a class="art-path music-path" href="music.html">
+                    <span class="path-number">01</span><strong>Music</strong>
+                    <p>Mashes, samples, source tracks, and reluctant production notes.</p><small>press play →</small>
+                </a>
+                <a class="art-path visual-path" href="visual-art.html">
+                    <span class="path-number">02</span><strong>Visual Art</strong>
+                    <p>Collection pieces and appreciation notes about what caught my eye.</p><small>look around →</small>
+                </a>
+            </div>
         </main>
     </header>
-
-    <footer class="music-footer">
-        <span>headphones recommended</span>
-        <a href="https://github.com/fzr72725" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-    </footer>
-    <script src="script.js?v=2"></script>
+    <footer class="music-footer"><span>taste is a work in progress</span><a href="../index.html">← home</a></footer>
 </body>
 </html>
