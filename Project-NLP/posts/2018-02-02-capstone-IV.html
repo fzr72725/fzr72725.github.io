@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Grid search across classification models using Doc2Vec features.">
+    <title>Naked Word, Part IV: Grid Search | Zee</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../nlp.css">
+    <link rel="stylesheet" href="../nlp-post.css">
+</head>
+<body class="quirky-home nlp-page nlp-post-page">
+    <header class="post-site-header">
+        <nav class="quirky-nav" aria-label="Primary navigation">
+            <a href="../../index.html">Home</a>
+            <a class="active" href="../index.html">NLP/AI</a>
+            <a href="../../Project-Mash/index.html">Music</a>
+            <a href="../../Project-Fun/index.html">Fun</a>
+            <a href="../../about.html">About</a>
+        </nav>
+    </header>
+    <main class="post-shell">
+        <article class="post-paper">
+            <div class="post-tape" aria-hidden="true"></div>
+            <header class="post-inline-header">
+                <p class="tiny-label">FIELD NOTE · 2018</p>
+                <h1>Naked Word, Part IV: Grid Search</h1>
+                <div class="post-meta">
+                    <time datetime="2018-02-02">February 2, 2018</time><span aria-hidden="true">✦</span><a href="../articles.html">NLP notebook</a>
+                </div>
+            </header>
+            <h1>Naked Word: Nationalities of World Language</h1>
+<h2>Part Four: GridSearch on Different Models Using Best Feature (Doc2Vec)</h2>
+<ol>
+<li>Logistic Regression</li>
+</ol>
+<p>After gridsearch, the trained model using optimized hyper parameters produced the following confusion matrix:
+<img alt="Logistic regression confusion matrix" src="/Project-NLP/images/lr_doc2vec_conf.png" /></p>
+<ol start="2">
+<li>Random Forest Classifier</li>
+</ol>
+<p>Notes on random forest classifier gridsearch:
+<code>max_depth</code>: choices on max_depth should be reasonably away from extreme cases such as 2 or 3. For example, if we set
+'max_depth': [None, 2, 3], chances are the gridsearch will pick "None" (meaning that a tree can grow as deep as possibel) because it will give better performance compare to a forest of very shallow trees.</p>
+<p><code>bootstrap</code>: normally we want the bootstrap to always be "True". The theory of random forest is based on bootstraping. Therefore, unless there is an obvious reason not to sample for each tree-building, we should always use bootstrap.</p>
+<p>After gridsearch, the trained model using optimized hypter parameters produced the following confusion matrix:
+<img alt="Random forest confusion matrix" src="/Project-NLP/images/rf_doc2vec_conf.png" /></p>
+<ol start="3">
+<li>Gradient Boosting Classifier</li>
+</ol>
+<p>After gridsearch, the trained model using optimized hypter parameters produced the following confusion matrix:
+<img alt="Gradient boosting confusion matrix" src="/Project-NLP/images/gb_doc2vec_conf.png" /></p>
+<ol start="4">
+<li>Ada Boost Classifier</li>
+</ol>
+<p>Note on Ada Boosting:
+Often, we can imitate AdaBoost learning by setting GradientBoostingClassifier(<code>loss</code>=<code>exponential</code>). But this trick only works for binary classification task. Since this is a multi-class case, I used sklearn's AdaBoostClassifier to do the training.</p>
+<p>After gridsearch, the trained model using optimized hypter parameters produced the following confusion matrix:
+<img alt="AdaBoost confusion matrix" src="/Project-NLP/images/adb_doc2vec_conf.png" /></p>
+<ol start="5">
+<li>Voting System</li>
+</ol>
+<p>One common approach to boost the classification accuracy is to ensemble several classifiers. Since all three tree-based models produced very similar accuracy scores, I tried to stack them together via voting classifier.</p>
+<pre><code>from sklearn.ensemble import VotingClassifier
+
+vote_clf1 = VotingClassifier(estimators=[('rf', rfclf), ('gdb', gdb_clf),('ada', ada_clf)], voting='hard')
+vote_clf1.fit(X_train, y_train)
+y_pred = vote_clf1.predict(X_test)
+pwk.print_confusion_matrix(y_test, y_pred)
+</code></pre>
+<p>The accuracy of the voting classifier improved quite a bit:
+<img alt="Voting classifier confusion matrix" src="/Project-NLP/images/voting_doc2vec_conf.png" /></p>
+<ol start="6">
+<li>Final Model</li>
+</ol>
+<p>Although the voting classifier improved the overall tree-based model performance, Logistic Regression is still significantly out performing all other models. Therefore, doc2vec essay representation training a logistic regression model is the final strategy.</p>
+        </article>
+        <aside class="post-margin-note" aria-label="Article navigation">
+            <p>you are here</p><strong>Naked Word, Part IV</strong>
+            <a href="../articles.html">← all learning notes</a><a href="../index.html">← NLP home</a>
+        </aside>
+    </main>
+    <footer class="nlp-footer"><a href="../articles.html">← the notebook</a><span>thanks for reading this far</span></footer>
+</body>
+</html>

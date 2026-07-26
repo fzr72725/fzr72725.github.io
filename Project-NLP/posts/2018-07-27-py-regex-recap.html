@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A systematic review of Python regular expressions through practical roadblocks and confusions.">
+    <title>So I Thought I Knew Regex | Zee</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../nlp.css">
+    <link rel="stylesheet" href="../nlp-post.css">
+</head>
+<body class="quirky-home nlp-page nlp-post-page">
+    <header class="post-site-header">
+        <nav class="quirky-nav" aria-label="Primary navigation">
+            <a href="../../index.html">Home</a>
+            <a class="active" href="../index.html">NLP/AI</a>
+            <a href="../../Project-Mash/index.html">Music</a>
+            <a href="../../Project-Fun/index.html">Fun</a>
+            <a href="../../about.html">About</a>
+        </nav>
+    </header>
+    <main class="post-shell">
+        <article class="post-paper">
+            <div class="post-tape" aria-hidden="true"></div>
+            <header class="post-inline-header">
+                <p class="tiny-label">FIELD NOTE · 2018</p>
+                <h1>So I Thought I Knew Regex</h1>
+                <div class="post-meta">
+                    <time datetime="2018-07-27">July 27, 2018</time><span aria-hidden="true">✦</span><a href="../articles.html">NLP notebook</a>
+                </div>
+            </header>
+            <p><strong>TL;DR:</strong> <em>Having been working with text for so many years, I thought I could call myself a regular expression veteran. I can do quite a few fancy things with merely regex in TextPad. However, my recent text mining project made me realize that I need to do some systematic review on regex in Python. In this article, I will walk through some key points about Python regex through a number of road blockers/confusion I encountered during my project.</em></p>
+<p>Although the same grand theme applies to most situations, there are so many nuances about regex when it comes to different platforms. The syntax can be quite different between regex in a text editor and a programming language.</p>
+<h3>Confusion 1</h3>
+<h4>re.compile(\&lt;pattern&gt;) or re.search(\&lt;pattern&gt;, \&lt;string&gt;)</h4>
+<p>When I first started working on my text mining project, I was too lazy to read through the python documentation about regex. And indeed most of the time stackoverflow gives pretty decent solutions for me to get by (I do follow the ten-tab rule at the very least though!). But:
+To start Python regex, some people do this:</p>
+<pre><code>pattern = re.compile('-\d{2}-', re.IGNORECASE)
+match = pattern.search('the number: bc-22-a0')
+</code></pre>
+<p>while others do this:</p>
+<pre><code>match = re.search('-\d{2}-', 'the number: bc-22-a0',re.IGNORECASE)
+</code></pre>
+<p>I admit that I have used both for completing identical tasks. And it always bugged me that I was not certain about whether one is better than the other or what. So this was the first thing I turned to the Python documentation for clarification:</p>
+<blockquote>
+<p>It is important to note that most regular expression operations are available as module-level functions and methods on compiled regular expressions. The functions are shortcuts that don’t require you to compile a regex object first, but miss some fine-tuning parameters.</p>
+</blockquote>
+<p>So now I get it: the first approach listed above relies on the compiled regex object, aka a regex object is created with the pattern first, then the object calls certain function to look for matching strings. The second approach on the other hand skips the object creation. It used the module to call regex functions directly. Recall that <code>re</code> is the module name. This behavior is the same as the <code>matplotlib.pyplot</code> module. One can either create a <code>figure</code> object and use it to call plot functions or use <code>matplotlib.pyplot</code> module to call plot functions directly. See details <a href="https://matplotlib.org/api/pyplot_summary.html">here</a>.</p>
+<h3>Confusion 2</h3>
+<h4>r'\w{2}\d{3}' vs '\w{2}\d{3}'</h4>
+<p>Similar to the above approaches, I have seen people using both in their regex code. See according to the documentation:</p>
+<blockquote>
+<p>...The solution is to use Python’s raw string notation for regular expression patterns; backslashes are not handled in any special way in a string literal prefixed with 'r'. So r"\n" is a two-character string containing '\' and 'n', while "\n" is a one-character string containing a newline. Usually patterns will be expressed in Python code using this raw string notation.</p>
+</blockquote>
+<p>I personally think that this statement is a bit confusing because it gives people the impression that if using <code>re.compile(r'\d')</code>, the regex will match literally a backslash and a letter "d". But that's not the case.</p>
+<p>Basically it is saying that if you mark your string literal as a raw string literal (using r') then the python interpreter will not change the representation of that string before putting it into memory. <strong>But once they've been parsed they are stored exactly the same way. This means that in memory there is no such thing as a raw string. Both the following strings are stored identically in memory with no concept of whether they were raw or not.</strong>
+<code>r'\d'</code> and <code>'\\d'</code> will be treated the same pattern (a digit character) by re.func(). <code>r'\d'</code> does not mean that re.func() will see one backslash and one letter "d".</p>
+<p>In summary, in many situations, <code>r'...'</code> and <code>'...'</code> mean the same pattern. One needs to understand how exactly these two ways work differently to pick the right one for a trickier situation.</p>
+<h3>Confusion 3</h3>
+<h4>search/match/findall</h4>
+<p>When we set up our pattern, the next step is to use the pattern onto the string in question to see if there is a match/matches. I have seen <code>re.search()</code>, <code>re.match()</code> and <code>re.findall()</code> for this task. So what is the difference?</p>
+<p>Here is what I found based on experimenting:
+1. re.search():</p>
+<pre><code>match = re.search(&lt;pattern&gt;, &lt;string&gt;)
+match = re.search('(\d{2})[^\d]*(\d{2})', 'this is 222, 33, 6.')
+print match.groups()
+&gt;&gt; ('22', '33')
+</code></pre>
+<p><em>search() only returns the first match, as oppose to all matches as findall()'s behavior. search() returns a Match object which has a bunch of attributes and functions. Often we can keep and  get the matched content via grouping</em></p>
+<ol start="2">
+<li>re.match():</li>
+</ol>
+<pre><code>match = re.match(&lt;pattern&gt;, &lt;string&gt;)
+match1 = re.match('(\d{2})[^\d]*(\d{2})', 'this is 222, 33, 6.')
+print match1
+&gt;&gt; None
+match2 = re.match('^.\*(\d{2})[^\d]*(\d{2})', 'this is 222, 33, 6.')
+print match2.groups()
+&gt;&gt; ('22', '33')
+</code></pre>
+<p><em>match1 returns None because match() has to find something from the very
+beginning of the string. match2 returns a match object because it finds something from the very
+beginning</em></p>
+<ol start="3">
+<li>re.findall()</li>
+</ol>
+<pre><code>re.findall(&lt;pattern&gt;, &lt;string&gt;)
+re.findall('\d{2},', '22, 345, 45, 2, 98')
+&gt;&gt; ['22,', '45,', '45,']
+</code></pre>
+<p><em>if no grouping, returns all matches as a string list; if grouped, returns all groups as a string list. findall() will find all existing matches, unlike search() which stops after
+finding the first match</em></p>
+<h3>Confusion 4</h3>
+<h4>Other fancy syntax</h4>
+<ol>
+<li>
+<p>nested repetition:
+Python does not allow direct nesting for repetition qualifiers like * or + or {m,n}. Instead, parentheses need to be used:
+(?:a{6})* matches any multiple of six 'a' characters</p>
+</li>
+<li>
+<p>Greedy qualifiers:
+ '*', '+' and '?' are all greedy. Meaning that they match as much text as possible.
+example:
+pattern '&lt;.*&gt;' on string '\&lt;a&gt; b \&lt;c&gt;' will treat the entire string as ONE match</p>
+</li>
+</ol>
+<pre><code>re.findall('&lt;.\*&gt;','&lt;a&gt;b&lt;c&gt;')
+&gt;&gt; '&lt;a&gt;b&lt;c&gt;'
+</code></pre>
+<p>'?' can be added after the greedy qualifiers to make it non-greedy</p>
+<pre><code>re.findall('&lt;.\*?&gt;','&lt;a&gt;b&lt;c&gt;')
+&gt;&gt; ['&lt;a&gt;', '&lt;c&gt;']
+</code></pre>
+<ol start="3">
+<li>
+<p>{m,n}:
+ Omitting m specifies a lower bound of zero, and omitting n specifies an
+infinite upper bound.
+<code>{,n}</code>
+<code>{m,}</code>
+Adding '?' after will match as few repetitions as possible:
+on the 6-character string 'aaaaaa', <code>a{3,5}</code> will match 5 'a' characters,
+while <code>a{3,5}?</code> will only match 3 characters.</p>
+</li>
+<li>
+<p>(?...):
+ According to the documentation:</p>
+</li>
+</ol>
+<blockquote>
+<p>This is an extension notation (a '?' following a '(' is not meaningful otherwise). The first character after the '?' determines what the meaning and further syntax of the construct is.</p>
+</blockquote>
+<p>4.1 (?:...)</p>
+<p>non-capturing version of parentheses (means it won't be treated as a group)
+This can be useful for:
+* nested repetition:
+<code>(?:a{6})*</code>
+* OR pattern
+<code>(?:january|feburary|march)</code></p>
+<p>4.2 (?=...)</p>
+<p>if ... matches next
+<code>Isaac (?=Asimov)</code> will match 'Isaac ' only if it’s followed by 'Asimov'.</p>
+<pre><code>re.findall('Isaac ?(?=Asimov)','Isaac Asimov')
+&gt;&gt; ['Isaac ']
+</code></pre>
+<p>4.3 (?!...)</p>
+<p>if ... doesn't match next
+<code>Isaac (?!Asimov)</code> will match 'Isaac ' only if it’s not followed by 'Asimov'.</p>
+<pre><code>re.findall('Isaac ?(?!Asimov)','Isaac something')
+&gt;&gt; ['Isaac ']
+</code></pre>
+<p>4.4 (?&lt;=...)</p>
+<p>if ... matches the preceded string</p>
+<pre><code>re.findall('(?&lt;=abc)def', 'abcdef')
+&gt;&gt; ['def']
+</code></pre>
+<p>4.5 (?&lt;!...)</p>
+<p>if ... doesn't match the preceded string</p>
+<pre><code>re.findall(r'(?&lt;!-) \w+', 'spam egg')
+&gt;&gt; [' egg']
+</code></pre>
+<ol start="5">
+<li>\b
+ matches the beginning or end of a word. This is particularly useful when you want to look for words</li>
+</ol>
+<pre><code>re.findall(r'\bfoo\b', 'foo bar')
+&gt;&gt; ['foo']
+</code></pre>
+<p>That's it. I hope this can be helpful for someone who struggles with Python regex like I did!</p>
+        </article>
+        <aside class="post-margin-note" aria-label="Article navigation">
+            <p>you are here</p><strong>Python regex recap</strong>
+            <a href="../articles.html">← all learning notes</a><a href="../index.html">← NLP home</a>
+        </aside>
+    </main>
+    <footer class="nlp-footer"><a href="../articles.html">← the notebook</a><span>thanks for reading this far</span></footer>
+</body>
+</html>

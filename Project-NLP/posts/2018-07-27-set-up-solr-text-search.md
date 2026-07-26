@@ -47,10 +47,10 @@ Up until now, all text file content is indexed into solr. Now we just need to ru
 For a starter, we can fire up the solr url at localhost to run some test query via Solr's UI:
 Go to any browser and put `http://localhost:8983/solr/#/my_core/query`
 You should be able to see something like this:
-![Image1](/images/solr_ui.png)
+![Apache Solr interface](/Project-NLP/images/solr_ui.png)
 
 Then you can run some query using the "q" box:
-![Image2](/images/solr_q.png)
+![Apache Solr query results](/Project-NLP/images/solr_q.png)
 As you can see, there is one document matching the field value being queried.
 
 But this only works if we have very small amount of documents. In my case, there are 7000 documents and more than 25 different date terms I was going to search for. So I needed a more automated approach. To automate, we can run curl command for queries.

@@ -1,40 +1,42 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fun | Materials</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A lightweight printable ballot for the 2024 Oscars.">
+    <title>Zee | 2024 Oscars Ballot</title>
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="fun.css">
 </head>
-<body>
-    <header class="main-head">
-        <nav class="main-nav">
-
-
-                <li><a href="../index.html"> Home</a></li>
-                <li><a href="parties.html"> Parties</a></li>
-                <li><a href="../about.html"> About</a></li>
-
+<body class="quirky-home fun-page">
+    <header class="fun-stage ballot-stage">
+        <nav class="quirky-nav" aria-label="Primary navigation">
+            <a href="../index.html">Home</a>
+            <a href="../Project-NLP/index.html">NLP/AI</a>
+            <a href="../Project-Mash/index.html">Music</a>
+            <a class="active" href="index.html">Fun</a>
+            <a href="../about.html">About</a>
         </nav>
-        <h1></h1>
-        <h1></h1>
-        <h1></h1>
 
+        <main class="ballot-main">
+            <section class="ballot-heading">
+                <p class="tiny-label">party materials · 2024</p>
+                <h1>Oscars Ballot</h1>
+                <p>Light version, for when three-plus hours is already enough commitment.</p>
+                <div class="ballot-actions">
+                    <a href="resources/Oscars_Ballot_2024.pdf" download>Download light ballot ↓</a>
+                    <a href="resources/Oscars_Ballot_2024_orig.pdf" download>Full ballot (proud of you) ↓</a>
+                </div>
+            </section>
+
+            <section class="ballot-paper" aria-label="2024 Oscars light ballot preview">
+                <div class="fun-tape" aria-hidden="true"></div>
+                <iframe src="resources/Oscars_Ballot_2024.pdf#view=FitH" title="2024 Oscars light ballot"></iframe>
+                <p>If the preview is blank, use the download button. PDFs enjoy being dramatic.</p>
+            </section>
+        </main>
     </header>
-    <section class="content-section container">
-      <h2 class="">2024 Oscars Ballot - Light</h2>
-      <div>
-        <embed src="resources/Oscars_Ballot_2024.pdf" width="500" height="700" 
-        type="application/pdf">
-      </div>
-      <div>
-        <a href="resources/Oscars_Ballot_2024_orig.pdf" download>Full Ballot (proud of you)</a>
-      </div>
-    </section>
 
-    <footer class="main-footer ">
-
-    </footer>
+    <footer class="fun-footer"><a href="index.html">← Fun home</a><span>choose recklessly</span></footer>
 </body>
 </html>

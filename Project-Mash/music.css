@@ -1,0 +1,156 @@
+.music-page { --plum: #5e3f70; --peach: #e9a982; background: #2d3448; }
+.music-stage {
+    background-image: linear-gradient(rgba(32, 35, 45, .2), rgba(32, 35, 45, .14)), url("../images/background1.png");
+    background-position: 92% center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: calc(100vh - 74px);
+}
+.music-main {
+    align-items: start;
+    display: grid;
+    gap: clamp(28px, 5vw, 72px);
+    grid-template-columns: minmax(250px, .68fr) minmax(430px, 1.15fr);
+    margin: 0 auto;
+    max-width: 1180px;
+    padding: 85px 30px 105px;
+}
+.music-note {
+    background: #fffaf2;
+    border: 1px solid #d2c3b4;
+    box-shadow: 12px 14px 0 rgba(59, 42, 74, .25);
+    color: var(--charcoal);
+    padding: 50px 42px 42px;
+    position: sticky;
+    top: 26px;
+    transform: rotate(-1.4deg);
+}
+.music-tape {
+    background: rgba(207, 229, 232, .8);
+    height: 30px;
+    left: calc(50% - 52px);
+    position: absolute;
+    top: -15px;
+    transform: rotate(3deg);
+    width: 104px;
+}
+.music-note h1, .tutorial-note h1 { font-size: clamp(3rem, 7vw, 5.6rem); letter-spacing: -.055em; line-height: .9; margin: 0 0 27px; }
+.music-note > p:not(.tiny-label) { color: #645d59; font-style: italic; line-height: 1.65; }
+.music-side-link, .tutorial-note a {
+    color: var(--plum);
+    display: inline-block;
+    font-family: "Courier New", monospace;
+    font-size: .7rem;
+    font-weight: 700;
+    margin-top: 24px;
+    text-decoration: none;
+}
+.track-stack { display: grid; gap: 17px; padding-top: 22px; }
+.music-track {
+    align-items: center;
+    background: rgba(255, 253, 248, .9);
+    border: 1px solid rgba(205, 193, 181, .9);
+    box-shadow: 8px 9px 0 rgba(179, 215, 220, .5);
+    color: var(--charcoal);
+    display: grid;
+    gap: 18px;
+    grid-template-columns: 54px minmax(0, 1fr) auto;
+    padding: 24px;
+    position: relative;
+    transform: rotate(.6deg);
+    transition: box-shadow .18s ease, transform .18s ease;
+}
+.music-track:nth-child(even) { box-shadow: -7px 9px 0 rgba(208, 177, 220, .47); transform: rotate(-.8deg); }
+.music-track:nth-child(3) { box-shadow: 8px 9px 0 rgba(231, 174, 137, .47); transform: rotate(1.1deg); }
+.music-track::before {
+    background: rgba(224, 238, 178, .75);
+    content: "";
+    height: 18px;
+    position: absolute;
+    right: 10%;
+    top: -9px;
+    transform: rotate(4deg);
+    width: 54px;
+}
+.music-track:hover { box-shadow: 3px 4px 0 rgba(255, 255, 255, .45); transform: rotate(0) translateY(-3px); }
+.track-play {
+    background: #2d3448;
+    border: 0;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    height: 48px;
+    transition: background .18s ease, transform .18s ease;
+    width: 48px;
+}
+.track-play:hover { background: var(--plum); transform: scale(1.08) rotate(-4deg); }
+.track-play.is-playing { background: #a65d65; }
+.track-play.has-error { background: #9a8f88; cursor: not-allowed; }
+.track-info p { font-size: 1.15rem; font-weight: 700; margin: 0 0 4px; }
+.track-info p small { font-size: .78em; font-weight: 400; }
+.track-info span, .music-track time { color: #746d68; font-family: "Courier New", monospace; font-size: .66rem; }
+.original-note { grid-column: 2; padding-top: 15px; }
+.original-note h2 { color: white; font-size: 2rem; margin: 0 0 20px; text-shadow: 0 2px 9px rgba(43, 36, 51, .32); }
+.original-note .tiny-label { color: #49315d; text-shadow: 0 1px 6px rgba(255, 255, 255, .65); }
+.original-track { box-shadow: 8px 9px 0 rgba(216, 230, 159, .5); transform: rotate(-.4deg); }
+.music-footer {
+    align-items: center;
+    background: #2d3448;
+    color: white;
+    display: flex;
+    font-family: "Courier New", monospace;
+    font-size: .68rem;
+    gap: 25px;
+    justify-content: flex-end;
+    padding: 28px max(24px, calc((100vw - 1120px) / 2));
+}
+.music-footer span { margin-right: auto; opacity: .7; }
+.music-footer a { color: white; text-decoration: none; }
+.tutorial-stage { min-height: calc(100vh - 72px); }
+.tutorial-main {
+    align-items: center;
+    display: flex;
+    gap: clamp(25px, 6vw, 85px);
+    justify-content: center;
+    min-height: 720px;
+    padding: 80px 25px 110px;
+}
+.tutorial-note {
+    background-color: #fffdf8;
+    background-image: repeating-linear-gradient(transparent, transparent 31px, rgba(207, 222, 233, .75) 32px);
+    border: 1px solid #cfc2b3;
+    box-shadow: 12px 14px 0 rgba(64, 49, 78, .22);
+    color: var(--charcoal);
+    max-width: 650px;
+    padding: 65px 60px 55px;
+    position: relative;
+    transform: rotate(-1deg);
+}
+.tutorial-note > p:not(.tiny-label) { font-size: 1.12rem; line-height: 1.85; margin: 0 0 18px; }
+.tutorial-note .tutorial-punchline { color: var(--plum); font-size: 1.25rem; font-style: italic; font-weight: 700; }
+.maybe-later {
+    background: #fff7a8;
+    box-shadow: 7px 8px 0 rgba(65, 54, 75, .2);
+    color: #3f3936;
+    font-family: "Courier New", monospace;
+    padding: 25px;
+    text-align: center;
+    transform: rotate(4deg);
+}
+.maybe-later span { font-family: Georgia, serif; font-size: 3rem; }
+.maybe-later p { font-weight: 700; margin: 4px 0; }
+.maybe-later small { font-size: .62rem; }
+@media (max-width: 800px) {
+    .music-main { grid-template-columns: 1fr; padding: 65px 20px 80px; }
+    .music-note { position: relative; top: 0; }
+    .original-note { grid-column: 1; }
+    .tutorial-main { align-items: center; flex-direction: column; }
+}
+@media (max-width: 520px) {
+    .music-track { gap: 12px; grid-template-columns: 48px 1fr; padding: 20px 16px; }
+    .music-track time { grid-column: 2; }
+    .tutorial-note { padding: 52px 28px 42px; }
+    .music-footer { flex-wrap: wrap; }
+}
+@media (prefers-reduced-motion: reduce) { .music-page * { transition: none !important; } }

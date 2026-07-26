@@ -1,45 +1,62 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music | About</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A few highly selective facts about Zee.">
+    <title>Zee | About</title>
+    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="about.css?v=1">
 </head>
-<body>
-    <header class="main-head">
-        <nav class="main-nav">
-          <li><a href="index.html"> Home</a></li>
-          <li><a href="Project-NLP/index.html"> NLP</a></li>
-          <li><a href="Project-Mash/index.html"> Music</a></li>
-          <li><a href="Project-Fun/index.html"> Fun</a></li>
-          <li><a href="about.html"> About</a></li>
-
+<body class="quirky-home about-page">
+    <header class="about-stage">
+        <nav class="quirky-nav" aria-label="Primary navigation">
+            <a href="index.html">Home</a>
+            <a href="Project-NLP/index.html">NLP/AI</a>
+            <a href="Project-Mash/index.html">Music</a>
+            <a href="Project-Fun/index.html">Fun</a>
+            <a class="active" href="about.html" aria-current="page">About</a>
         </nav>
 
+        <main class="about-main">
+            <figure class="about-photo">
+                <div class="photo-tape" aria-hidden="true"></div>
+                <img src="images/me7.png" alt="Zee smiling outdoors in winter">
+                <figcaption>proof that I occasionally go outside</figcaption>
+            </figure>
 
+            <section class="about-note" aria-labelledby="about-title">
+                <div class="note-tape" aria-hidden="true"></div>
+                <p class="tiny-label">the short version</p>
+                <h1 id="about-title">About me</h1>
+                <p class="about-intro">Real.</p>
+
+                <div class="good-things" aria-label="Things Zee likes">
+                    <span>Books are good.</span>
+                    <span>Arts are good.</span>
+                    <span>Wines are good.</span>
+                    <span>Jogs are good.</span>
+                    <span>Tennises are good.</span>
+                    <span>Bikes are good.</span>
+                </div>
+
+                <div class="important-opinions" aria-label="Important opinions">
+                    <p><b>Star Wars</b> over Star Trek.</p>
+                    <p><b>Marvel</b> over DC.</p>
+                    <p>I’m not rich yet.</p>
+                </div>
+
+                <div class="about-details">
+                    <p><small>LANGUAGES</small> Mandarin · English (US)</p>
+                    <a href="https://www.instagram.com/zeeno_1fan" target="_blank" rel="noopener noreferrer">IG: @zeeno_1fan ↗</a>
+                </div>
+            </section>
+        </main>
     </header>
-    <section class="content-section container">
-        <h2>About Me</h2>
-        <p>Indoorsy.
-        <p>Real.
-        <p>
-        <img class="about-image" src="images/me7.png" alt="" srcset="">
-        <p>Books are good.
-        <p>Arts are good.
-        <p>Wines are good.
-        <p>Jogs are good.
-        <p>Star Wars over Star Trek.
-        <p>Marvels over DC.
-        <p>I'm not rich yet.
-        <p>Mandarin
-        <p>English (US)
-        <p>IG: @zeeno_1fan
-            <br>
-    </section>
-    <footer class="main-footer">
 
+    <footer class="about-footer">
+        <span>that’s probably enough information</span>
+        <a href="index.html">← back home</a>
     </footer>
 </body>
 </html>

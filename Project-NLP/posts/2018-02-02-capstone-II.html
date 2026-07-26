@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Extracting document-vector features with Doc2Vec.">
+    <title>Naked Word, Part II: Doc2Vec Representation | Zee</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../nlp.css">
+    <link rel="stylesheet" href="../nlp-post.css">
+</head>
+<body class="quirky-home nlp-page nlp-post-page">
+    <header class="post-site-header">
+        <nav class="quirky-nav" aria-label="Primary navigation">
+            <a href="../../index.html">Home</a>
+            <a class="active" href="../index.html">NLP/AI</a>
+            <a href="../../Project-Mash/index.html">Music</a>
+            <a href="../../Project-Fun/index.html">Fun</a>
+            <a href="../../about.html">About</a>
+        </nav>
+    </header>
+    <main class="post-shell">
+        <article class="post-paper">
+            <div class="post-tape" aria-hidden="true"></div>
+            <header class="post-inline-header">
+                <p class="tiny-label">FIELD NOTE · 2018</p>
+                <h1>Naked Word, Part II: Doc2Vec Representation</h1>
+                <div class="post-meta">
+                    <time datetime="2018-02-02">February 2, 2018</time><span aria-hidden="true">✦</span><a href="../articles.html">NLP notebook</a>
+                </div>
+            </header>
+            <h1>Naked Word: Nationalities of World Language</h1>
+<h2>Part Two: Feature Engineering -- Doc2Vec Representation</h2>
+<p>Steps:
+1. Loading pandas DataFrame from <a href="2018-02-02-capstone-I.html">part one</a></p>
+<pre><code>df_0 = pd.read_pickle('../20180117_part_one.pkl')
+</code></pre>
+<ol start="2">
+<li>Extract essay vector representation using doc2vec</li>
+</ol>
+<pre><code># Add tag to each document:
+def tag_docs(docs, col):
+    tagged = docs.apply(lambda r: TaggedDocument(words=simple_preprocess(r[col]), tags=[r.label]), axis=1)
+    return tagged
+
+# Train the doc2vec model
+def train_doc2vec_model(tagged_docs, window, size):
+    sents = tagged_docs.values
+    doc2vec_model = Doc2Vec(sents, size=size, window=window, iter=20, dm=1)
+    return doc2vec_model
+
+# Building the final vector feature for the classifier
+def vec_for_learning(doc2vec_model, tagged_docs):
+    sents = tagged_docs.values
+    targets, regressors = zip(\
+            *[(doc.tags[0], doc2vec_model.infer_vector(doc.words, steps=20)) for doc in sents])
+    return targets, regressors
+
+train_data, test_data = train_test_split(df_0, train_size=0.7)
+col = 'essay_content'
+train_docs = pwk.tag_docs(train_data, col, literal=True)
+test_docs = pwk.tag_docs(test_data, col, literal=True)
+model = pwk.train_doc2vec_model(train_docs, 2, 100)
+
+y_train, X_train = pwk.vec_for_learning(model, train_docs)
+y_test, X_test = pwk.vec_for_learning(model, test_docs)
+</code></pre>
+<ol start="3">
+<li>To get a rough idea of how essay vectors perform on different text features (<code>essay_content</code>,<code>DT_pos</code>,<code>DT_insent_arch_ngram</code>, etc.), I used a basic LogisticRegression model and k-fold cross validation to examine the classification performance (accuracy score) when using different text features to generate the vector representations.</li>
+</ol>
+<pre><code>train_data, test_data = train_test_split(df_0, train_size=0.8)
+col = 'essay_content'
+
+clf = LogisticRegression()
+print pwk.k_fold_doc2vec_clf(train_data, col, 2, 100, clf)
+</code></pre>
+<pre><code>train_data, test_data = train_test_split(df_0, train_size=0.8)
+col = 'DT_insent_arch_ngram'
+
+clf = LogisticRegression()
+print pwk.k_fold_doc2vec_clf(train_data, col, 1, 100, clf, literal=False)
+</code></pre>
+<p>...
+The result shows that text feature <code>essay_content</code> is producing the best result. Therefore, I used vector representation extracted from this column to be the doc2vec feature for my dataset</p>
+        </article>
+        <aside class="post-margin-note" aria-label="Article navigation">
+            <p>you are here</p><strong>Naked Word, Part II</strong>
+            <a href="../articles.html">← all learning notes</a><a href="../index.html">← NLP home</a>
+        </aside>
+    </main>
+    <footer class="nlp-footer"><a href="../articles.html">← the notebook</a><span>thanks for reading this far</span></footer>
+</body>
+</html>

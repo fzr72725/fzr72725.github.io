@@ -4,7 +4,7 @@
 1. Logistic Regression
 
 After gridsearch, the trained model using optimized hyper parameters produced the following confusion matrix:
-![lr conf](/images/lr_doc2vec_conf.png)
+![Logistic regression confusion matrix](/Project-NLP/images/lr_doc2vec_conf.png)
 
 2. Random Forest Classifier
 
@@ -15,12 +15,12 @@ Notes on random forest classifier gridsearch:
 `bootstrap`: normally we want the bootstrap to always be "True". The theory of random forest is based on bootstraping. Therefore, unless there is an obvious reason not to sample for each tree-building, we should always use bootstrap.
 
 After gridsearch, the trained model using optimized hypter parameters produced the following confusion matrix:
-![rf conf](/images/rf_doc2vec_conf.png)
+![Random forest confusion matrix](/Project-NLP/images/rf_doc2vec_conf.png)
 
 3. Gradient Boosting Classifier
 
 After gridsearch, the trained model using optimized hypter parameters produced the following confusion matrix:
-![gb conf](/images/gb_doc2vec_conf.png)
+![Gradient boosting confusion matrix](/Project-NLP/images/gb_doc2vec_conf.png)
 
 
 4. Ada Boost Classifier
@@ -29,7 +29,7 @@ Note on Ada Boosting:
 Often, we can imitate AdaBoost learning by setting GradientBoostingClassifier(`loss`=`exponential`). But this trick only works for binary classification task. Since this is a multi-class case, I used sklearn's AdaBoostClassifier to do the training.
 
 After gridsearch, the trained model using optimized hypter parameters produced the following confusion matrix:
-![adb conf](/images/adb_doc2vec_conf.png)
+![AdaBoost confusion matrix](/Project-NLP/images/adb_doc2vec_conf.png)
 
 5. Voting System
 
@@ -44,7 +44,7 @@ y_pred = vote_clf1.predict(X_test)
 pwk.print_confusion_matrix(y_test, y_pred)
 ```
 The accuracy of the voting classifier improved quite a bit:
-![vote conf](/images/voting_doc2vec_conf.png)
+![Voting classifier confusion matrix](/Project-NLP/images/voting_doc2vec_conf.png)
 
 6. Final Model
 

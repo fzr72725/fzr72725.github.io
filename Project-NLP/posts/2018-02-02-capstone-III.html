@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Feature selection and modeling for native-language classification.">
+    <title>Naked Word, Part III: Feature Selection and Modeling | Zee</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../nlp.css">
+    <link rel="stylesheet" href="../nlp-post.css">
+</head>
+<body class="quirky-home nlp-page nlp-post-page">
+    <header class="post-site-header">
+        <nav class="quirky-nav" aria-label="Primary navigation">
+            <a href="../../index.html">Home</a>
+            <a class="active" href="../index.html">NLP/AI</a>
+            <a href="../../Project-Mash/index.html">Music</a>
+            <a href="../../Project-Fun/index.html">Fun</a>
+            <a href="../../about.html">About</a>
+        </nav>
+    </header>
+    <main class="post-shell">
+        <article class="post-paper">
+            <div class="post-tape" aria-hidden="true"></div>
+            <header class="post-inline-header">
+                <p class="tiny-label">FIELD NOTE · 2018</p>
+                <h1>Naked Word, Part III: Feature Selection and Modeling</h1>
+                <div class="post-meta">
+                    <time datetime="2018-02-02">February 2, 2018</time><span aria-hidden="true">✦</span><a href="../articles.html">NLP notebook</a>
+                </div>
+            </header>
+            <h1>Naked Word: Nationalities of World Language</h1>
+<h2>Part Three: Feature Selection and Modeling</h2>
+<p>Steps:
+1. Get all the acquired numeric features</p>
+<pre><code>numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
+df_numeric = df_0.select_dtypes(include=numerics)
+
+print ', '.join(df_numeric.columns)
+&gt;&gt; doc_id, unique_lemma, avg_stc_length, total_stc, POS_adjv_repeat_rate, POS_adjv_repeat_cnt, DT_max_dp_cnts_std, DT_ROOT_idx_mean, DT_pass_cnt_sum, DT_mark_cnt_sum
+
+X = df_0[['unique_lemma', 'avg_stc_length', \
+          'total_stc', 'POS_adjv_repeat_rate', \
+          'POS_adjv_repeat_cnt', 'DT_max_dp_cnts_std', \
+          'DT_ROOT_idx_mean', 'DT_pass_cnt_sum', 'DT_mark_cnt_sum']]
+y = df_0['label']
+X_train, X_test, y_train, y_test = train_test_split(X, y)
+</code></pre>
+<ol start="2">
+<li>
+<p>Fit all numeric features into a RandomForestClassifier to examine feature importance
+<img alt="Feature importance plot" src="/Project-NLP/images/feature_imp.png" />
+The order of feature importance (more to less):
+<code>avg_stc_length</code>, <code>DT_ROOT_idx_mean</code>, <code>unique_lemma</code>, <code>DT_max_dp_cnts_std</code>, <code>POS_adjv_repeat_rate</code>,
+<code>total_stc</code>, <code>POS_adjv_repeat_cnt</code>, <code>DT_mark_cnt_sum</code>, <code>DT_pass_cnt_sum</code></p>
+</li>
+<li>
+<p>Fit all numeric features into a GradientBoostingClassifier to examine feature importance for identifying a specific class. This is extremely useful for the Japanese and Korean native language groups because essays from these two classes appear to be mis-classfied as one another very frequently.
+<img alt="Partial dependence plot for Japanese and Korean" src="/Project-NLP/images/jp_ko.png" />
+Significant features to differentiate 'JPN' from 'KOR' (more to less):
+<code>POS_adjv_repeat_cnt</code></p>
+</li>
+<li>
+<p>Evaluate how mere numeric features perform with different algorithms
+- <code>LogisticRegression</code>: accuracy: 0.351129889756
+- <code>RandomForestClassifier</code>: accuracy: 0.355977554772
+- <code>GradientBoostingClassifier</code>: accuracy: 0.351245166152
+Although better then random guess, modeling result shows that merely using these numeric features does not produce great result. Therefore, need to move onto more sophisticated syntactic features.</p>
+</li>
+<li>
+<p>Use tf-idf matrix on pos tag body for essays to train classifiers
+As mentioned in <a href="2018-02-02-capstone-I.html">part one</a>, I have converted the original essay text into the corresponding syntactic tags as listed below:
+<strong>DT_pos_join</strong>
+<strong>DT_archs_join</strong>
+<strong>DT_insent_pos_ngram</strong>
+<strong>DT_insent_arch_ngram</strong></p>
+</li>
+</ol>
+<p>I have tried each of the four features separately, the result:
+<strong>DT_pos_join</strong>: accuracy: 0.664607324846
+<strong>DT_archs_join</strong>: accuracy: 0.655624609373
+<strong>DT_insent_pos_ngram</strong> accuracy: 0.65240657206
+<strong>DT_insent_arch_ngram</strong> accuracy: 0.645502590324</p>
+<ol start="6">
+<li>Try stacking two tf-idf matrices and train the classifier</li>
+</ol>
+<pre><code>X = df_0[['DT_pos_join','DT_insent_pos_ngram']]
+y = df_0['label']
+X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.8)
+
+vectorizer1 = TfidfVectorizer(lowercase=True, ngram_range=(3,3), max_features=800).fit(X_train['DT_pos_join'])
+DT_pos_join_train_dtm = vectorizer.transform(X_train['DT_pos_join'])
+DT_pos_join_test_dtm = vectorizer.transform(X_test['DT_pos_join'])
+
+vectorizer2 = TfidfVectorizer(lowercase=True, ngram_range=(1,1), max_features=800).fit(X_train['DT_insent_pos_ngram'])
+DT_insent_pos_ngram_train_dtm = vectorizer.transform(X_train['DT_insent_pos_ngram'])
+DT_insent_pos_ngram_test_dtm = vectorizer.transform(X_test['DT_insent_pos_ngram'])
+
+import scipy as sp
+df_all_train = sp.sparse.hstack((DT_pos_join_train_dtm, DT_insent_pos_ngram_train_dtm),format='csr')
+df_all_test = sp.sparse.hstack((DT_insent_pos_ngram_test_dtm, DT_insent_pos_ngram_test_dtm),format='csr')
+df_all_columns=vectorizer1.get_feature_names() + vectorizer2.get_feature_names()
+
+clf = LogisticRegression()
+clf.fit(df_all_train, y_train)
+y_pred = clf.predict(df_all_test)
+</code></pre>
+<p>The classification accuracy did not improve much.</p>
+<ol start="7">
+<li>Use doc2vec vectors for essays to train classifiers</li>
+</ol>
+<pre><code>train_data, test_data = train_test_split(df_0, train_size=0.8)
+
+col = 'essay_content'
+train_docs = pwk.tag_docs(train_data, col, literal=True)
+test_docs = pwk.tag_docs(test_data, col, literal=True)
+model = pwk.train_doc2vec_model(train_docs, 2, 100)
+
+y_train, X_train = pwk.vec_for_learning(model, train_docs)
+y_test, X_test = pwk.vec_for_learning(model, test_docs)
+
+logreg = LogisticRegression()
+logreg.fit(X_train, y_train)
+y_pred = logreg.predict(X_test)
+</code></pre>
+<p>So far, doc2vec matrix gives me the best accuracy: 0.815278</p>
+        </article>
+        <aside class="post-margin-note" aria-label="Article navigation">
+            <p>you are here</p><strong>Naked Word, Part III</strong>
+            <a href="../articles.html">← all learning notes</a><a href="../index.html">← NLP home</a>
+        </aside>
+    </main>
+    <footer class="nlp-footer"><a href="../articles.html">← the notebook</a><span>thanks for reading this far</span></footer>
+</body>
+</html>

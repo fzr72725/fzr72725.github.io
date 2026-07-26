@@ -1,93 +1,69 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music | Tutorials</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Notes from Zee's natural language processing experiments.">
+    <title>Zee | NLP Notebook</title>
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="nlp.css">
 </head>
-<body>
-    <header class="main-head">
-        <nav class="main-nav">
-
-
-                <li><a href="../index.html"> Home</a></li>
-                <li><a href="articles.html"> Articles</a></li>
-                <li><a href="../about.html"> About</a></li>
-
+<body class="quirky-home nlp-page articles-page">
+    <header class="nlp-mini-hero">
+        <nav class="quirky-nav" aria-label="Primary navigation">
+            <a href="../index.html">Home</a>
+            <a class="active" href="index.html">NLP/AI</a>
+            <a href="../Project-Mash/index.html">Music</a>
+            <a href="../Project-Fun/index.html">Fun</a>
+            <a href="../about.html">About</a>
         </nav>
-        <h1></h1>
-        <h1></h1>
-        <h1></h1>
-
+        <div class="notebook-heading">
+            <p class="nlp-stamp">THE ARCHIVE</p>
+            <h1>Learning notes</h1>
+            <p>Eight dispatches from the era when I apparently had excellent documentation habits.</p>
+        </div>
+        <main class="article-index">
+            <a class="article-slip" href="posts/2018-07-27-set-up-solr-text-search.html">
+            <time datetime="2018-07-27">Jul 27, 2018</time><span>Set Up a Working Text Search Engine in 10 Minutes</span><b aria-hidden="true">↗</b>
+            </a>
+            <a class="article-slip" href="posts/2018-07-27-py-regex-recap.html">
+            <time datetime="2018-07-27">Jul 27, 2018</time><span>So I Thought I Knew Regex</span><b aria-hidden="true">↗</b>
+            </a>
+            <section class="article-series" aria-labelledby="naked-word-series">
+                <div class="series-tab">
+                    <div>
+                        <p>FOUR-PART SERIES · FEB 02, 2018</p>
+                        <h2 id="naked-word-series">Naked Word</h2>
+                    </div>
+                    <span>Nationalities of World Language</span>
+                </div>
+                <div class="series-notes">
+                    <a class="article-slip" href="posts/2018-02-02-capstone-I.html">
+                        <time datetime="2018-02-02">Feb 02, 2018</time><span>Naked Word, Part I: Feature Engineering</span><b aria-hidden="true">↗</b>
+                    </a>
+                    <a class="article-slip" href="posts/2018-02-02-capstone-II.html">
+                        <time datetime="2018-02-02">Feb 02, 2018</time><span>Naked Word, Part II: Doc2Vec</span><b aria-hidden="true">↗</b>
+                    </a>
+                    <a class="article-slip" href="posts/2018-02-02-capstone-III.html">
+                        <time datetime="2018-02-02">Feb 02, 2018</time><span>Naked Word, Part III: Modeling</span><b aria-hidden="true">↗</b>
+                    </a>
+                    <a class="article-slip" href="posts/2018-02-02-capstone-IV.html">
+                        <time datetime="2018-02-02">Feb 02, 2018</time><span>Naked Word, Part IV: Grid Search</span><b aria-hidden="true">↗</b>
+                    </a>
+                </div>
+            </section>
+            <a class="article-slip" href="posts/2018-01-14-How-to-Connect-to-Jupyter-Notebook-Server-on-AWS-EC2-from-Your-Local-Machine.html">
+            <time datetime="2018-01-14">Jan 14, 2018</time><span>Connect Jupyter on AWS EC2</span><b aria-hidden="true">↗</b>
+            </a>
+            <a class="article-slip" href="posts/2018-01-14-genism-guide.html">
+            <time datetime="2018-01-14">Jan 14, 2018</time><span>Text Classification with Doc2Vec + Logistic Regression</span><b aria-hidden="true">↗</b>
+            </a>
+        </main>
     </header>
-    <section class="content-section container">
-      <h2 class="">Articles</h2>
-      <div>
-          <div class="header-row">
-              <span class="track-date">Date</span>
-              <span class="track-title">title</span>
-          </div>
-          <div class="track-row">
-              <span class="track-date">Jul 27 2018</span>
-              <span class="track-title">
-                <a href="posts/2018-07-27-set-up-solr-text-search.md">Set Up A Working Text Search Engine in 10 Minutes</a>
-              </span>
-          </div>
-          <div class="track-row">
-              <span class="track-date">Jul 27 2018</span>
-              <span class="track-title">
-                <a href="posts/2018-07-27-py-regex-recap.md">So I Thought I Knew Regex</a>
-              </span>
-          </div>
-          <div class="track-row">
-              <span class="track-date">Feb 02 2018</span>
-              <span class="track-title">
-                <a href="posts/2018-02-02-capstone-IV.md">Capstone IV</a>
-              </span>
-          </div>
-          <div class="track-row">
-              <span class="track-date">Feb 02 2018</span>
-              <span class="track-title">
-                <a href="posts/2018-02-02-capstone-III.md">Capstone III</a>
-              </span>
-          </div>
-          <div class="track-row">
-              <span class="track-date">Feb 02 2018</span>
-              <span class="track-title">
-                <a href="posts/2018-02-02-capstone-II.md">Capstone II</a>
-              </span>
-          </div>
-          <div class="track-row">
-              <span class="track-date">Feb 02 2018</span>
-              <span class="track-title">
-                <a href="posts/2018-02-02-capstone-I.md">Capstone I</a>
-              </span>
-          </div>
-          <div class="track-row">
-              <span class="track-date">Jan 21 2018</span>
-              <span class="track-title">
-                <a href="posts/2018-01-21-tfidf-classification.md">Tfidf Classification</a>
-              </span>
-          </div>
-          <div class="track-row">
-              <span class="track-date">Jan 14 2018</span>
-              <span class="track-title">
-                <a href="posts/2018-01-14-How-to-Connect-to-Jupyter-Notebook-Server-on-AWS-EC2-from-Your-Local-Machine.markdown">Connect Jupyter Notebook Server on AWS EC2 from Your Local Machine</a>
-              </span>
-          </div>
-          <div class="track-row">
-              <span class="track-date">Jan 14 2018</span>
-              <span class="track-title">
-                <a href="posts/2018-01-14-genism-guide.markdown">Text Classification Using Gensim's Doc2Vec and Logistic Regression</a>
-              </span>
-          </div>
-      </div>
-    </section>
 
-    <footer class="main-footer ">
-
+    <footer class="nlp-footer">
+        <a href="index.html">← NLP home</a>
+        <span>notes end here (for now)</span>
     </footer>
 </body>
 </html>
